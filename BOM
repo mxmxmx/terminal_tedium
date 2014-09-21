@@ -1,0 +1,101 @@
+/* BOM for terminal tedium */
+
+
+- resistors 0805:
+
+220R 		3x 
+220R ferrit     2x (BLM21PG221SN1D)
+470R 		2x 
+500R            3x
+1k 		4x 
+10k 		2x 
+20k 		2x 
+33k 		16x 
+49k9 		6x 
+100k 		20x 
+
+led resistors   2x (*)
+
+
+==============================
+
+- caps 0805 (16v or better):
+
+47pf    	 2x (NP0/C0G) 
+100n 		32x 
+330n             2x
+10n		 2x (NP0/C0G, may be 1206) 
+1u 		 2x (may be 1206)
+2u2 		 3x (may be 1206)
+
+
+==============================
+
+- ICs/semis/etc:
+
+PCM5102A (TSSOP): 1x  (mouser # 595-PCM5102APWR)
+MCP3208 (SOIC16): 1x  (mouser # 579-MCP3208CISL)
+TL072 (SOIC8):    5x  (**)
+LM358 (SOIC8):    1x
+
+NPN transistors (MMBT3904): 4x 
+BAT42 Schottky diodes (minimelf): 4x 
+SM5817 Schottky diodes: 3x (or use 1206 ferrit bead, rated 1A)
+BAT54s Schottky diodes: (sot-23) 8x 
+ADP150 regulator (3v3, TSOT): 1x (mouser # 584-ADP150AUJZ-3.3R7)
+
+==============================
+
+through-hole parts: 
+
+- 10uH inductance 	   1x
+- 10uF (electrolytic)      1x      
+- 22uf (electrolytic)	   3x
+- +3v3 regulator 78L33     1x (TO 92)
+— -5v  regulator 79L05     1x (TO 92)
+- +5v  RECOM 785.0 1.0.    1x (the 500 ma version should do; or use a 7805)
+- LEDs  2x (i'd use ultrabright) 
+
+==============================
+
+misc:
+
+-jacks 			16x (thonkiconn/kobiconn)
+- pots			6x  (9mm vertical; linear (50k-100k will do)
+- tact switches 	3x  (multimecs 5E/5G)* (mouser #: 642-5GTH935)
++ caps			3x  (multimecs “1SS09-15.0”) (mouser #: 642-1SS09-15.0, or 16.0)
+
+- single row 2-pin male header (RM2.54) + little jumper plastic thingie to match (or use wire): 1x
+- LONG female headers to match rpi b+ GPIO (2x20, RM2.54): 1x (***)
+- spacer/standoff (M3) (to match the 2x20 header): 2x (c. 20mm)
+
+==============================
+
+
+odroid w - adapter: (optional)
+
+- 100n cap (RM5, ceramic, throughole) : 1x
+- 10uf     (electrolytic, throughole) : 1x
+- 100R resistor (0805)                : 1x
+
+pin headers / male+female each:
+
+- 12 pin : 1x
+- 13 pin : 1x
+- 15 pin : 1x
+
+	
+notes: 
+
+(*) i'd use ultrabright leds, and correspondingly large resistor values (to taste)
+
+(**) one of the TL072 is in the audio path — if you’d like to use something better for the output stage, i’ve used an OPA1662
+
+(***) if planning to use the odroid w, they don't have to be tall. better to use 'machine pin', as the holes on the adapter are fairly small.
+
+
+
+
+
+
+

@@ -10,7 +10,7 @@
 1k 		4x 
 10k 		2x 
 20k 		2x 
-33k 		16x 
+33k 		20x 
 49k9 		6x 
 100k 		20x 
 
@@ -39,7 +39,6 @@ TL072 (SOIC8):    5x  (**)
 LM358 (SOIC8):    1x
 
 NPN transistors (MMBT3904): 4x 
-BAT42 Schottky diodes (minimelf): 4x 
 SM5817 Schottky diodes: 3x (or use 1206 ferrit bead, rated 1A)
 BAT54s Schottky diodes: (sot-23) 8x 
 ADP150 regulator (3v3, TSOT): 1x (mouser # 584-ADP150AUJZ-3.3R7)

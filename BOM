@@ -3,6 +3,7 @@
 
 - resistors 0805:
 
+100R            8x (†)
 220R 		3x 
 220R ferrit     2x (BLM21PG221SN1D)
 470R 		2x 
@@ -85,6 +86,8 @@ pin headers / male+female each:
 
 	
 notes: 
+
+(†) see build doc - 
 
 (*) i'd use ultrabright leds, and correspondingly large resistor values (to taste)
 

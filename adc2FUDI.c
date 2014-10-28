@@ -43,7 +43,7 @@ void Interrupt_TR3 (void) { TR3_flag = 1; }
 void Interrupt_TR4 (void) { TR4_flag = 1; }
 void Interrupt_B1  (void) { B1_flag  = 1; }
 void Interrupt_B2  (void) { B2_flag  = 1; }
-void Interrupt_B3  (void) { B2_flag  = 1; }
+void Interrupt_B3  (void) { B3_flag  = 1; }
 
 
 /*  FUDI messages for triggers and buttons */ 
@@ -145,7 +145,7 @@ int main(int argc, char *argv[]){
       	die("TCP_NODELAY failed");
 
     	
-	wiringPiSetupSys();
+	wiringPiSetupGpio();
 	wiringPiSPISetup(ADC_SPI_CHANNEL, ADC_SPI_SPEED);
 
 	wiringPiISR (4,  INT_EDGE_FALLING, &Interrupt_TR1) ;

@@ -95,7 +95,7 @@ notes:
 
 (**) one of the TL072 is in the audio path — if you’d like to use something better for the output stage, i’ve used an OPA1662
 
-(***) if planning to use the odroid w, they don't have to be tall. better to use 'machine pin', as the holes on the adapter are fairly small.
+(***) four of these, for example, will do : http://www.taydaelectronics.com/connectors-sockets/stackable-headers/stackable-header-10-pins-2-54mm.html ; if planning to use the odroid w, they don't have to be tall. better to use 'machined' ones (ie w/ round pin), as the holes on the adapter are fairly small.
 
 
 

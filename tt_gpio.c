@@ -37,20 +37,17 @@ typedef struct _tt_gpio
     t_float state16;
     t_float state26;
    
-    t_float TR1_flag;    
-    t_float TR2_flag;
-    t_float TR3_flag;
-    t_float TR4_flag;
-    t_float B1_flag;
-    t_float B2_flag;
-    t_float B3_flag;
-
 } t_tt_gpio;
 
 
-
-
 // ? TR flag etc— volatile?
+volatile int TR1_flag;    
+volatile int TR2_flag;
+volatile int TR3_flag;
+volatile int TR4_flag;
+volatile int B1_flag;
+volatile int B2_flag;
+volatile int B3_flag;
 
 
 /* -------------------------------------- */
@@ -72,49 +69,49 @@ static void tt_gpio_pin26(t_tt_gpio *x, t_floatarg msg)
     digitalWrite(26, x->state26);
 }
 
-// maybe  outlet_bang(x->x_out); could be moved into isr?
 
 static void tt_gpio_bang(t_tt_gpio *x) 
 {
    
-    if (x->TR1_flag) { 
-	x->TR1_flag = 0;
+    if (TR1_flag) { 
+	TR1_flag = 0;
         outlet_bang(x->x_out1);
     }
-    if (x->TR2_flag) { 
-	x->TR2_flag = 0;
+    if (TR2_flag) { 
+	TR2_flag = 0;
         outlet_bang(x->x_out2);
     }
-    if (x->TR3_flag) { 
-	x->TR3_flag = 0;
+    if (TR3_flag) { 
+	TR3_flag = 0;
         outlet_bang(x->x_out3);
     }	
-    if (x->TR4_flag) { 
-	x->TR4_flag = 0;
+    if (TR4_flag) { 
+	TR4_flag = 0;
         outlet_bang(x->x_out4);
     }
-    if (x->B1_flag) { 
-	x->B1_flag = 0;
+    if (B1_flag) { 
+	B1_flag = 0;
         outlet_bang(x->x_out5);
     }
-    if (x->B2_flag) { 
-	x->B2_flag = 0;
+    if (B2_flag) { 
+	B2_flag = 0;
         outlet_bang(x->x_out6);
     }		
-    if (x->B3_flag) { 
-	x->B3_flag = 0;
+    if (B3_flag) { 
+	B3_flag = 0;
         outlet_bang(x->x_out7);
     }			
 	
 }
 
-static void Interrupt_TR1 (t_tt_gpio *x) { x->TR1_flag = 1; }
-static void Interrupt_TR2 (t_tt_gpio *x) { x->TR2_flag = 1; }
-static void Interrupt_TR3 (t_tt_gpio *x) { x->TR3_flag = 1; }
-static void Interrupt_TR4 (t_tt_gpio *x) { x->TR4_flag = 1; }
-static void Interrupt_B1  (t_tt_gpio *x) { x->B1_flag  = 1; }
-static void Interrupt_B2  (t_tt_gpio *x) { x->B2_flag  = 1; }
-static void Interrupt_B3  (t_tt_gpio *x) { x->B3_flag  = 1; }
+
+static void Interrupt_TR1 () { TR1_flag = 1; }
+static void Interrupt_TR2 () { TR2_flag = 1; }
+static void Interrupt_TR3 () { TR3_flag = 1; }
+static void Interrupt_TR4 () { TR4_flag = 1; }
+static void Interrupt_B1  () { B1_flag  = 1; }
+static void Interrupt_B2  () { B2_flag  = 1; }
+static void Interrupt_B3  () { B3_flag  = 1; }
 
 
 /* -------------------------------------- */
@@ -148,10 +145,10 @@ static t_tt_gpio tt_gpio_new(t_floatarg _state16, t_floatarg _state26){
     pinMode(24, INPUT);
 			
     // pull ups? only buttons		
-    pullUpDnControl(4,  PUD_UP);
-    pullUpDnControl(17, PUD_UP);
-    pullUpDnControl(2,  PUD_UP);
-    pullUpDnControl(3,  PUD_UP);	
+    // pullUpDnControl(4,  PUD_UP);
+    // pullUpDnControl(17, PUD_UP);
+    // pullUpDnControl(2,  PUD_UP);
+    // pullUpDnControl(3,  PUD_UP);	
     pullUpDnControl(23, PUD_UP);
     pullUpDnControl(25, PUD_UP);
     pullUpDnControl(24, PUD_UP);

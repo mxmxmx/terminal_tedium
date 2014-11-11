@@ -2,7 +2,16 @@ terminal_tedium
 ===============
 
 
-raspberry pi (b+) / odroid w eurorack stereo DAC (PCM5102a) breakout board
+raspberry pi a+ / b+ / odroid w eurorack stereo DAC (PCM5102a) breakout board
+
+
+
+preliminary build info: for_the_impatient.pdf
+
+
+![My image](https://farm4.staticflickr.com/3880/15023886875_d333c69029_c.jpg)
+
+
 
 cf. muffwiggler.com for more details:
 

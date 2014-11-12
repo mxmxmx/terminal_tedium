@@ -9,7 +9,7 @@ raspberry pi a+ / b+ / odroid w eurorack stereo DAC (PCM5102a) breakout board
 preliminary build info: for_the_impatient.pdf
 
 
-![My image](https://farm4.staticflickr.com/3880/15023886875_d333c69029_c.jpg)
+![My image](https://farm6.staticflickr.com/5602/15151692744_667437ae88_b.jpg)
 
 
 

@@ -19,5 +19,5 @@ cf. muffwiggler.com for more details:
 http://www.muffwiggler.com/forum/viewtopic.php?t=104896&postdays=0&postorder=asc&start=0
 
 
-* odroid w requires an adapter board. 
-* next step? adapter for http://wiki.iteadstudio.com/Core_AW204x ?
+* odroid w requires an adapter board (o_adapter.zip)
+* next? adapter for http://wiki.iteadstudio.com/Core_AW204x ?

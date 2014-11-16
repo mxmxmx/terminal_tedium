@@ -20,4 +20,4 @@ http://www.muffwiggler.com/forum/viewtopic.php?t=104896&postdays=0&postorder=asc
 
 
 * requires an adapter board. 
-* next step? A20 adapter?
+* next step? adapter for http://wiki.iteadstudio.com/Core_AW204x ?

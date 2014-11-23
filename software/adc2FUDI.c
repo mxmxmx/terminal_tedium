@@ -61,7 +61,7 @@ uint8_t SENDMSG;
 // ADC 
 
 uint16_t adc[8] = {0, 0, 0, 0, 0, 0, 0, 0}; //  store prev.
-uint8_t  map_adc[8] = {5, 4, 7, 6, 1, 0, 3, 2}; // map to panel [1 - 2 - 3; 4 - 5 - 6; 7, 8]
+uint8_t  map_adc[8] = {5, 4, 6, 7, 1, 0, 2, 3}; // map to panel [1 - 2 - 3; 4 - 5 - 6; 7, 8]
 
 uint16_t readADC(int _channel){ // 12 bit
 
@@ -214,7 +214,7 @@ int main(int argc, char *argv[]){
 				/* format FUDI msg: id, whitespace, val, semicolon, /0 */
 				ADC_FUDI = (char *) malloc(msgLength); 
 				snprintf(ADC_FUDI+2, msgLength, "%d", val);
-				ADC_FUDI[0] = (char)(((int)'0')+(*adc_ptr));
+				ADC_FUDI[0] = (char)(0x30+*adc_ptr); // + ascii offset
 				ADC_FUDI[1] = ' ';
 				ADC_FUDI[msgLength-2] = ';';
 			

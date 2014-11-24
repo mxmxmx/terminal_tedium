@@ -61,7 +61,7 @@ uint8_t SENDMSG;
 // ADC 
 
 uint16_t adc[8] = {0, 0, 0, 0, 0, 0, 0, 0}; //  store prev.
-uint8_t  map_adc[8] = {5, 4, 6, 7, 1, 0, 2, 3}; // map to panel [1 - 2 - 3; 4 - 5 - 6; 7, 8]
+uint8_t  map_adc[8] = {5, 4, 7, 6, 1, 0, 2, 3}; // map to panel [1 - 2 - 3; 4 - 5 - 6; 7, 8]
 
 uint16_t readADC(int _channel){ // 12 bit
 

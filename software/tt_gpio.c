@@ -8,7 +8,8 @@
 #include <wiringPi.h>
 
 
-/* -------------------------------------- */
+/* a+, b+ : GPIO16, 26; if using odroid w, change pins to GPIO34 and 35 */
+
 
 const uint8_t CLK1 = 16; // 34
 const uint8_t CLK2 = 26; // 35
@@ -47,7 +48,6 @@ static void tt_gpio_bang(t_tt_gpio *x)
 // do nothing
 }
 
-/* -------------------------------------- */
 
 void *tt_gpio_new(t_floatarg _state16, t_floatarg _state26){
 

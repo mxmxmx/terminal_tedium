@@ -5,7 +5,7 @@ sudo modprobe spi-bcm2708
 # pull up the GPIO [buttons 1-3]
 sudo python /home/pi/pullup.py
 # start pd
-puredata -nogui -noadc -audiooutdev 0 /home/pi/PD/pv.pd  &
+sudo puredata -nogui -noadc -audiooutdev 0 /home/pi/PD/pv.pd  &
 # pause a little
 sleep 5
 # start the ADC + interrupts

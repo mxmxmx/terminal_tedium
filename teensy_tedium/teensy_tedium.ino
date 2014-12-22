@@ -198,9 +198,9 @@ void loop()
    if (_UI) { 
      
        _UI = false;
-       if (!digitalRead(GPIO23) && millis() - LAST_UI > DEBOUNCE)  { Serial.println("B 1"); LAST_UI = millis(); }
-       if (!digitalRead(GPIO24) && millis() - LAST_UI > DEBOUNCE)  { Serial.println("B 3"); LAST_UI = millis(); }
-       if (!digitalRead(GPIO25) && millis() - LAST_UI > DEBOUNCE)  { Serial.println("B 2"); LAST_UI = millis(); }
+       if (!digitalReadFast(GPIO23) && millis() - LAST_UI > DEBOUNCE)  { Serial.println("B 1"); LAST_UI = millis(); }
+       if (!digitalReadFast(GPIO24) && millis() - LAST_UI > DEBOUNCE)  { Serial.println("B 3"); LAST_UI = millis(); }
+       if (!digitalReadFast(GPIO25) && millis() - LAST_UI > DEBOUNCE)  { Serial.println("B 2"); LAST_UI = millis(); }
    }
 }
 

@@ -5,7 +5,8 @@ teensy adapter test sketch
 not a great deal happens: 
 
 - a sine wave should be present at the audio outputs (different frequencies at L / R).
-- clocking any of the digital inputs should make the frequency change, or play some sequence. this will also toggle the digital output / LEDs on and off.
+- clocking any of the digital inputs should make the frequency change, ie play some sequence. 
+  it will also toggle the digital outputs / LEDs on and off.
 - the adc values are printed to the serial monitor; 
 - pressing the buttons should print something to the monitor, too.
 

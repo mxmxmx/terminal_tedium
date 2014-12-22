@@ -7,6 +7,8 @@ raspberry pi a+ / b+ / odroid w * eurorack stereo DAC (PCM5102a) breakout board
 
 build info, see here: https://github.com/mxmxmx/terminal_tedium/wiki
 
+the 'teensy tedium' folder has gerbers + test sketch for a teensy 3.1 adapter (to be used instead of the rpi, if desired)
+
 ![My image](https://farm6.staticflickr.com/5602/15151692744_667437ae88_b.jpg)
 
 

@@ -1,17 +1,18 @@
 /*
-
-teensy adapter test sketch
-
-not a great deal happens: 
-
-- a sine wave should be present at the audio outputs (different frequencies at L / R).
-- clocking any of the digital inputs should make the frequency change, ie play some sequence. 
-  it will also toggle the digital outputs / LEDs on and off.
-- the adc values are printed to the serial monitor; 
-- pressing the buttons should print something to the monitor, too.
-
-
-*/
+ *
+ * teensy adapter test sketch
+ *
+ *
+ * ... wherein not a great deal happens: 
+ *
+ * - sine wave(s) should be present at the audio outputs (different frequencies at L / R);
+ * - clocking any of the digital inputs should make the frequency change, ie play a sequence; 
+ * - clocking them will also toggle the digital outputs / LEDs;
+ * - the adc values are printed to the serial monitor; 
+ * - pressing the buttons should print something to the monitor, too.
+ *
+ *
+ */
  
 #include <Audio.h>
 #include <Wire.h>

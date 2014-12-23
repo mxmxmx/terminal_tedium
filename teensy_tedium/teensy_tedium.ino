@@ -158,7 +158,6 @@ void setup()
 /* a few more variables needed below */
 
 uint8_t cnt, LEN = 6, xxx;
-uint16_t freq;
 uint16_t SEQ[] = {440, 880, 660, 880, 660, 330};
 
 
@@ -214,7 +213,7 @@ void dosomething() {
   
        cnt++;
        if (cnt >=LEN) cnt = 0;
-       freq = SEQ[cnt];
+       uint16_t freq = SEQ[cnt];
        
        AudioNoInterrupts();
        waves[0]->frequency(freq);

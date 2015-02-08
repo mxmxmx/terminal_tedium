@@ -53,7 +53,7 @@ through-hole parts:
 - 22uf (electrolytic)	   3x
 - +3v3 regulator 78L33     1x (TO 92)
 — -5v  regulator 79L05     1x (TO 92)
-- +5v  RECOM 785.0 1.0.    1x (the 500 ma version should do; or use a 7805)
+- +5v  RECOM 785.0 1.0.    1x (the 500 ma version should do for models a+, b+; pi 2 needs 1.0, it looks like; as a cheaper solution, use a 7805)
 - LEDs  2x (i'd use ultrabright) 
 
 ==============================

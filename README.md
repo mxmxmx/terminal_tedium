@@ -2,7 +2,7 @@ terminal_tedium
 ===============
 
 
-raspberry pi a+ / b+ / odroid w * eurorack stereo DAC (PCM5102a) breakout board
+raspberry pi 2 / pi a+ / b+ / odroid w * eurorack stereo DAC (PCM5102a) breakout board
 
 
 build info, see here: https://github.com/mxmxmx/terminal_tedium/wiki
@@ -19,4 +19,4 @@ http://www.muffwiggler.com/forum/viewtopic.php?t=104896&postdays=0&postorder=asc
 
 
 * odroid w requires an adapter board (o_adapter.zip)
-* next? adapter for http://wiki.iteadstudio.com/Core_AW204x ?
+* pi 2 draws more power, so is less suitable from that perspective. 

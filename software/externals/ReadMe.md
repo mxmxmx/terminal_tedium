@@ -32,7 +32,6 @@ left argument: -- ; second argument: gate 1 (top); right argument: gate 2 (botto
 
 ```
 [tedium_clk_in <GPIO_num>] 
-
 |
 o
 ```

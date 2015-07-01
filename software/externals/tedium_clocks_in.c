@@ -29,8 +29,8 @@ void *tedium_clk_in_new(t_floatarg _pin)
 {
 	t_tedium_clk_in *x = (t_tedium_clk_in *)pd_new(tedium_clk_in_class);
 	x->x_clock = clock_new(x, (t_method)tedium_clk_in_tick);
-    // valid pin? 
-	fprintf(stderr,"pin <%s>\n", _pin); 
+    	// valid pin? 
+	// fprintf(stderr,"pin <%s>\n", _pin); 
         if (_pin == 4 || _pin == 17 || _pin == 2 || _pin == 3 || _pin == 23 || _pin == 24 || _pin == 25) x->pinNum = _pin;
         else x->pinNum = 4; // default to pin #4	
 	pinMode(x->pinNum, INPUT);

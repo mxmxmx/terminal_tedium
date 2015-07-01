@@ -19,7 +19,7 @@ externals for mcp3208 + GPIO / terminal tedium
 
 **gate outputs:**
 
-left argument: gate 1 (top); right argument: gate 2 (bottom)).
+left argument: -- ; second argument: gate 1 (top); right argument: gate 2 (bottom)).
 
 ```    
        o    o

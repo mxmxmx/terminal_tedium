@@ -5,7 +5,7 @@ externals for mcp3208 + GPIO / terminal tedium
 
 
 **ADC:**
-
+```
 [open /dev/spidev0.1[
 
 |
@@ -15,21 +15,28 @@ externals for mcp3208 + GPIO / terminal tedium
 | | | | | | | | 
 
 [ADC0]  [ADC1]  [etc]
+```
 
 **gate outputs:**
 
 left argument: gate 1 (top); right argument: gate 2 (bottom)).
 
+```    
+       o    o
+       |    |
 [tt_gpio 0 0]
 
+```
 
 **gate/switch inputs:**
 
-
-[tedium_clk_in GPIO_num] 
+```
+[tedium_clk_in <GPIO_num>] 
 
 |
- 
+o
+```
+
 where GPIO_num = 4, 17, 2, 3, 23, 24, or 25
 
 

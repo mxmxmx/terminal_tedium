@@ -215,16 +215,15 @@ static void disis_spi_bang(t_disis_spi *spi)
     // invert a2dVal :
     a2dVal[a2dChannel] = 0xFFF - (((data[1] & 0x0f) << 0x08) | data[2]); //merge data[1] & data[2] to get result
    
-    //fprintf(stderr,"%d\n", a2dVal);
   }
-
-  outlet_float(spi->x_out8, a2dVal[4]);
-  outlet_float(spi->x_out7, a2dVal[1]);
+  // .. and map to panel : 
+  outlet_float(spi->x_out8, a2dVal[2]);
+  outlet_float(spi->x_out7, a2dVal[3]);
   outlet_float(spi->x_out6, a2dVal[0]);
-  outlet_float(spi->x_out5, a2dVal[3]);
-  outlet_float(spi->x_out4, a2dVal[6]);
-  outlet_float(spi->x_out3, a2dVal[7]);
-  outlet_float(spi->x_out2, a2dVal[2]);
+  outlet_float(spi->x_out5, a2dVal[7]);
+  outlet_float(spi->x_out4, a2dVal[4]);
+  outlet_float(spi->x_out3, a2dVal[1]);
+  outlet_float(spi->x_out2, a2dVal[6]);
   outlet_float(spi->x_out1, a2dVal[5]);
 }
 

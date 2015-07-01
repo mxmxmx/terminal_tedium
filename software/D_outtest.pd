@@ -8,8 +8,8 @@
 #X msg 202 51 1;
 #X obj 202 141 % 2;
 #X floatatom 202 171 5 0 0 0 - - -;
-#X obj 304 212 print;
-#X obj 186 235 tt_gpio 0 0;
+#X obj 292 231 print;
+#X obj 172 235 tt_gpio 0 0;
 #X connect 0 0 1 0;
 #X connect 1 0 2 0;
 #X connect 1 0 6 0;

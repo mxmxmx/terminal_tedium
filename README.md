@@ -2,6 +2,8 @@ terminal_tedium
 ===============
 
 
+![My image](https://farm1.staticflickr.com/423/19280194146_4568770dcf_c.jpg)
+
 raspberry pi 2 / pi a+ / b+ / odroid w * eurorack stereo DAC (PCM5102a) breakout board
 
 

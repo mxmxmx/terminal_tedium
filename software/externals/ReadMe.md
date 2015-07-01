@@ -7,13 +7,9 @@ externals for mcp3208 + GPIO / terminal tedium
 **ADC:**
 ```
 [open /dev/spidev0.1[
-
 |
-
 [disis_spi]
-
 | | | | | | | | 
-
 [ADC0]  [ADC1]  [etc]
 ```
 

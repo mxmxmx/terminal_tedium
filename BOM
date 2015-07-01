@@ -52,7 +52,7 @@ through-hole parts:
 - 10uF (electrolytic)      1x      
 - 22uf (electrolytic)	   3x
 - +3v3 regulator 78L33     1x (TO 92)
-— -5v  regulator 79L05     1x (TO 92)
+— -5v  regulator 79L05     1x (TO 92) (or hack-replace with LM4040-5v + ~ 1k 0805 resistor ‡)
 - +5v  RECOM 785.0 1.0.    1x (the 500 ma version should do for models a+, b+; pi 2 needs 1.0, it looks like; as a cheaper solution, use a 7805)
 - LEDs  2x (i'd use ultrabright) 
 
@@ -90,6 +90,8 @@ notes:
 (†) see build doc - 
 
 (††) you'll probably be okay without them; at least there's internal protection diodes on the mcp3208
+
+(‡) replacing the 79L05 with a LM4040 is fairly straightforward, but they're *not* pin-compatible, of course. it might reduce jitter slightly.
 
 (*) i'd use ultrabright leds, and correspondingly large resistor values (to taste)
 

@@ -20,8 +20,8 @@ void tedium_clk_in_tick(t_tedium_clk_in *x)
 {
 	int prevState = x->clkState;
 	x->clkState = digitalRead(x->pinNum); 
-    // pin pulled low since last tick ? 
-    if(prevState && !x->clkState) outlet_bang(x->x_obj.ob_outlet);
+	 // pin pulled low since last tick ? 
+    	if(prevState && !x->clkState) outlet_bang(x->x_obj.ob_outlet);
 	clock_delay(x->x_clock, 0x1); 
 }
 
@@ -35,7 +35,7 @@ void *tedium_clk_in_new(t_floatarg _pin)
         else x->pinNum = 4; // default to pin #4	
 	pinMode(x->pinNum, INPUT);
 
-    outlet_new(&x->x_obj, gensym("bang"));
+    	outlet_new(&x->x_obj, gensym("bang"));
 	tedium_clk_in_tick(x);
 	return (void *)x;
 }

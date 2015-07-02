@@ -18,8 +18,8 @@ externals for mcp3208 + GPIO / terminal tedium
 left inlet: -- ; second inlet: gate #1 (top); right inlet: gate #2 (bottom)). sending [1( will turn the gate on, sending [0( off; the two arguments determine the initial state (0 or 1 = off or on).
 
 ```    
-	 o    	o
-       |    	|
+       o    	o
+       |       	|
 [tedium_output 0 0]
 
 ```

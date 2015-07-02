@@ -15,7 +15,7 @@ externals for mcp3208 + GPIO / terminal tedium
 
 **gate outputs:**
 
-left argument: -- ; second argument: gate 1 (top); right argument: gate 2 (bottom)).
+left inlet: -- ; second inlet: gate 1 (top); right inlet: gate 2 (bottom)). the two arguments determine the initial state (0 or 1 = off or on).
 
 ```    
       	 o    	  o
@@ -32,7 +32,7 @@ left argument: -- ; second argument: gate 1 (top); right argument: gate 2 (botto
 o
 ```
 
-where GPIO_num = 4, 17, 2, 3, 23, 24, or 25
+where GPIO_num = 4, 17, 2, 3, 23, 24, or 25.
 
 
 

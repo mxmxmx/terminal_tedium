@@ -4,7 +4,8 @@ externals for mcp3208 + GPIO / terminal tedium
 *usage:*
 
 
-**ADC** (reads ADC when banged):
+**ADC:**
+
 ```
 [open /dev/spidev0.1(
 |
@@ -12,12 +13,9 @@ externals for mcp3208 + GPIO / terminal tedium
 |  |  |  |  |  |  |  | 
 [ADC0]  [ADC1]  	[etc]
 ```
-
+"open /dev/spidev0.1" opens the device. reads ADC when banged.
+ 
 **gate outputs:**
-
-left inlet: nc / second inlet: gate #1 (top) / right inlet: gate #2 (bottom). 
-
-sending "1" will turn the gate on, sending "0" off; the two arguments determine the initial state (0 = off, 1 = on).
 
 ```
               o      o
@@ -25,16 +23,18 @@ sending "1" will turn the gate on, sending "0" off; the two arguments determine 
    [tedium_output 0 0]
 
 ```
+left inlet: nc / second inlet: gate #1 (top) / right inlet: gate #2 (bottom). 
 
-**gate/switch inputs** (outputs bang): 
+sending "1" turns the gate on, sending "0" off; the two arguments determine the initial state (0 = off, 1 = on).
+
+**gate/switch inputs:** 
 
 ```
 [tedium_input <GPIO_num>] 
 |
 o
 ```
-
-where GPIO_num = 4, 17, 2, 3, 23, 24, or 25.
+where GPIO_num = 4, 17, 2, 3, 23, 24, or 25. outputs bang.
 
 ====================================================================================
 

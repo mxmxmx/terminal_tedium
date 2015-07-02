@@ -29,6 +29,7 @@ void die(char *errorMessage)
 
 // interrupt things
 
+/*
 static volatile uint8_t TR1_flag = 0;
 static volatile uint8_t TR2_flag = 0;
 static volatile uint8_t TR3_flag = 0;
@@ -46,7 +47,7 @@ void Interrupt_B2  (void) { B2_flag  = 1; }
 void Interrupt_B3  (void) { B3_flag  = 1; }
 
 
-/*  FUDI messages for triggers and buttons */ 
+// FUDI messages for triggers and buttons 
 const char FUDI1[5] = {'8', '\t', '1', ';', '\0'};
 const char FUDI2[5] = {'9', '\t', '1', ';', '\0'};
 const char FUDI3[6] = {'1', '0', '\t', '1', ';', '\0'};
@@ -54,11 +55,11 @@ const char FUDI4[6] = {'1', '1', '\t', '1', ';', '\0'};
 const char FUDI5[6] = {'1', '2', '\t', '1', ';', '\0'};
 const char FUDI6[6] = {'1', '3', '\t', '1', ';', '\0'};
 const char FUDI7[6] = {'1', '4', '\t', '1', ';', '\0'};
+*/
 
 uint8_t SENDMSG;
 
-
-// ADC 
+// ADC :
 
 uint16_t adc[8] = {0, 0, 0, 0, 0, 0, 0, 0}; //  store prev.
 uint8_t  map_adc[8] = {5, 2, 7, 6, 3, 0, 1, 4}; // map to panel [1 - 2 - 3; 4 - 5 - 6; 7, 8]
@@ -148,6 +149,7 @@ int main(int argc, char *argv[]){
 	wiringPiSetupGpio();
 	wiringPiSPISetup(ADC_SPI_CHANNEL, ADC_SPI_SPEED);
 
+   /*
 	wiringPiISR (4,  INT_EDGE_FALLING, &Interrupt_TR1) ;
   	wiringPiISR (17, INT_EDGE_FALLING, &Interrupt_TR2) ;
   	wiringPiISR (2,  INT_EDGE_FALLING, &Interrupt_TR3) ;
@@ -155,11 +157,12 @@ int main(int argc, char *argv[]){
   	wiringPiISR (23, INT_EDGE_FALLING, &Interrupt_B1)  ;
 	wiringPiISR (25, INT_EDGE_FALLING, &Interrupt_B2)  ; 
 	wiringPiISR (24, INT_EDGE_FALLING, &Interrupt_B3)  ; 
+   */	
 
 	for(;;){
 
 		// digital inputs: interrupt?
-
+       /*
 		if (TR1_flag) { 
 			TR1_flag = 0;
 			send(sock, FUDI1, 4, 0); // strlen(FUDI2) = 4
@@ -188,7 +191,7 @@ int main(int argc, char *argv[]){
 			B3_flag =  0;
 			send(sock, FUDI7, 5, 0); // strlen(FUDI7) = 5
 		}
-
+        */
                 /// ADC: 
 	     
 		adc_counter++;
@@ -199,7 +202,7 @@ int main(int argc, char *argv[]){
 			adc_counter2++;  // incr  counter #2
 			if (adc_counter2 >= ADC_NUM_CHANNELS) adc_counter2 = 0; 
                         uint8_t *adc_ptr = map_adc;
-			adc_ptr += adc_counter2; // map adc to panel
+			adc_ptr += adc_counter2; // -> map to panel
 			int16_t val = 0;
 			uint8_t msgLength;
 			char *ADC_FUDI;
@@ -207,11 +210,11 @@ int main(int argc, char *argv[]){
 			val = RESOLUTION - readADC(adc_counter2);
 			
 			if (SENDMSG) {
-				if (val > 999)        { msgLength = 8; }
-				else if (val > 99)    { msgLength = 7; }
-				else if (val > 9)     { msgLength = 6; }
-				else 		      { msgLength = 5; }
-				/* format FUDI msg: id, whitespace, val, semicolon, /0 */
+				if (val > 999)      msgLength = 8; 
+				else if (val > 99)  msgLength = 7; 
+				else if (val > 9)   msgLength = 6; 
+				else 		      	msgLength = 5; 
+				// format FUDI msg: { id, whitespace, val, semicolon, /0 }
 				ADC_FUDI = (char *) malloc(msgLength); 
 				snprintf(ADC_FUDI+2, msgLength, "%d", val);
 				ADC_FUDI[0] = (char)(0x30+*adc_ptr); // + ascii offset
@@ -221,8 +224,7 @@ int main(int argc, char *argv[]){
 				send(sock, ADC_FUDI, strlen(ADC_FUDI), 0); 
 			}
 			SENDMSG = 0;
-			// if (i == 5) { printf("%d \n", adc[i]);} 
-			// to do: figure out the reset condition.					
+			// if (i == 5) { printf("%d \n", adc[i]);} 				
 		}
 
 	

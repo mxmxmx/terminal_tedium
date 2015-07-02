@@ -8,9 +8,9 @@ externals for mcp3208 + GPIO / terminal tedium
 ```
 [open /dev/spidev0.1(
 |
-[disis_spi]
-| | | | | | | | 
-[ADC0]  [ADC1]  [etc]
+[terminal_tedium_adc]
+|  |  |  |  |  |  |  | 
+[ADC0]  [ADC1]  	[etc]
 ```
 
 **gate outputs:**
@@ -18,16 +18,16 @@ externals for mcp3208 + GPIO / terminal tedium
 left argument: -- ; second argument: gate 1 (top); right argument: gate 2 (bottom)).
 
 ```    
-       o    o
-       |    |
-[tt_gpio 0 0]
+      	 o    	  o
+       	 |    	  |
+[tedium_output 0 0]
 
 ```
 
 **gate/switch inputs:**
 
 ```
-[tedium_clk_in <GPIO_num>] 
+[tedium_input <GPIO_num>] 
 |
 o
 ```
@@ -38,7 +38,7 @@ where GPIO_num = 4, 17, 2, 3, 23, 24, or 25
 
 *compile with:*
 
-`gcc -c [name_of_external].c -o [name_of_external].o`
+`gcc -O3 -Wall -c [name_of_external].c -o [name_of_external].o`
 
 `ld --export-dynamic -shared -o [name_of_external].pd_linux [name_of_external].o -lc -lm -lwiringPi`
 

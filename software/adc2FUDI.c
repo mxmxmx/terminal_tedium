@@ -19,7 +19,7 @@
 #define ADC_SPI_SPEED 1000000
 #define ADC_NUM_CHANNELS 8
 #define RESOLUTION 4095 // 1023 if using MCP3008; 4095 if using MCP3208
-#define DEADBAND 4
+#define DEADBAND 2
 
 void die(char *errorMessage)
 {

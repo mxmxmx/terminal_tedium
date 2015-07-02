@@ -4,7 +4,7 @@ externals for mcp3208 + GPIO / terminal tedium
 *usage:*
 
 
-**ADC:**
+**ADC** (needs metro):
 ```
 [open /dev/spidev0.1(
 |

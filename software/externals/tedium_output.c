@@ -87,7 +87,7 @@ void tedium_output_setup(void)
         wiringPiSetupGpio();
     #endif
     tedium_output_class = class_new(gensym("tedium_output"),
-		    (t_newmethod)tedium_output_new,
+            (t_newmethod)tedium_output_new,
             (t_method)tedium_output_free,
             sizeof(t_tedium_output),
             CLASS_DEFAULT,

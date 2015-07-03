@@ -48,20 +48,21 @@ static void tedium_output_pin26(t_tedium_output *x, t_floatarg msg)
     #endif
 }
 
-/*
-static void tedium_output_bang(t_tedium_output *x)
+
+static void tedium_output_free(t_tedium_output *x)
 {
-// do nothing
+	inlet_free(x->x_in1);
+	inlet_free(x->x_in2);  
 }
-*/
+
 
 
 void *tedium_output_new(t_floatarg _state16, t_floatarg _state26){
 
     t_tedium_output *x = (t_tedium_output *)pd_new(tedium_output_class);
 
-    x->x_in1 = inlet_new(&x->x_obj, &x->x_obj.ob_pd, gensym("float"), gensym("pin26"));
-    x->x_in2 = inlet_new(&x->x_obj, &x->x_obj.ob_pd, gensym("float"), gensym("pin16"));
+    x->x_in1 = inlet_new(&x->x_obj, &x->x_obj.ob_pd, gensym("float"), gensym("pin16"));
+    x->x_in2 = inlet_new(&x->x_obj, &x->x_obj.ob_pd, gensym("float"), gensym("pin26"));
 
     #ifdef __arm__
         pinMode(CLK1, OUTPUT);
@@ -87,11 +88,11 @@ void tedium_output_setup(void)
     #endif
     tedium_output_class = class_new(gensym("tedium_output"),
 		    (t_newmethod)tedium_output_new,
-                    0, sizeof(t_tedium_output),
+            (t_method)tedium_output_free,
+            sizeof(t_tedium_output),
 		    CLASS_DEFAULT,
 		    A_DEFFLOAT, A_DEFFLOAT,
-                    0);
-    //class_addbang(tedium_output_class,  tedium_output_bang);  // ?
+		    0);
     class_addmethod(tedium_output_class, (t_method)tedium_output_pin16, gensym("pin16"), A_FLOAT, 0);
     class_addmethod(tedium_output_class, (t_method)tedium_output_pin26, gensym("pin26"), A_FLOAT, 0);
 }

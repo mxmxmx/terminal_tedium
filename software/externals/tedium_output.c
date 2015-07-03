@@ -90,9 +90,9 @@ void tedium_output_setup(void)
 		    (t_newmethod)tedium_output_new,
             (t_method)tedium_output_free,
             sizeof(t_tedium_output),
-		    CLASS_DEFAULT,
-		    A_DEFFLOAT, A_DEFFLOAT,
-		    0);
+            CLASS_DEFAULT,
+            A_DEFFLOAT, A_DEFFLOAT,
+            0);
     class_addmethod(tedium_output_class, (t_method)tedium_output_pin16, gensym("pin16"), A_FLOAT, 0);
     class_addmethod(tedium_output_class, (t_method)tedium_output_pin26, gensym("pin26"), A_FLOAT, 0);
 }

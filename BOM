@@ -1,14 +1,13 @@
-/* BOM for terminal tedium */
+/* BOM for terminal tedium (†) */
 
 
 - resistors 0805:
 
-100R            8x (†)
 220R 		3x 
 220R ferrit     2x (BLM21PG221SN1D)
 470R 		2x 
 510R            3x
-1k 		4x 
+1k 		12x 
 10k 		2x 
 20k 		2x 
 33k 		20x 
@@ -87,7 +86,7 @@ pin headers / male+female each:
 	
 notes: 
 
-(†) see build doc - 
+(†) also see build doc - https://github.com/mxmxmx/terminal_tedium/wiki/build-it
 
 (††) you'll probably be okay without them; at least there's internal protection diodes on the mcp3208
 

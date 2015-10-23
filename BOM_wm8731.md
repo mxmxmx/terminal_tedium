@@ -47,9 +47,7 @@
 - TL072 (SOIC8):			3x  (**)
 - MCP6002 (SOIC8):			1x
 - MCP6004 (SOIC14):			1x
-
-
-- NPN transistors (MMBT3904): 4x 
+- NPN transistors (MMBT3904): 4x
 - SM5817 Schottky diodes: 3x (or use 1206 ferrit bead, rated 1A)
 - ADP150 regulator (3v3, TSOT): 1x (mouser # 584-ADP150AUJZ-3.3R7)
 - LM4040-2v5 (SOT-23) : 1x
@@ -73,9 +71,9 @@
 - pots:				  6x  (9mm vertical; linear (50k-100k will do))
 - tact switches: 	  2x  (multimecs 5E/5G series) (mouser # 642-5GTH935)
 - illum. tact switch: 1x  (multimecs 5E/5G series) (e.g. mouser # 642-5GTH93542 (= YELLOW))
-+ caps			- 2x  (multimecs “1SS09-15.0”) (mouser # 642-1SS09-15.0, or 642-1SS09-16.0)
-				- 1x  transparent (multimecs “1IS11-15.0”) (mouser # 642-1IS11-15.0, or 642-1IS11-16.0)
-
+- caps:
+	- 2x  (multimecs “1SS09-15.0”) (mouser # 642-1SS09-15.0, or 642-1SS09-16.0)
+	- 1x  transparent (multimecs “1IS11-15.0”) (mouser # 642-1IS11-15.0, or 642-1IS11-16.0)
 - single row 2-pin male header (RM2.54) + little jumper plastic thingie to match (or use wire): 1x ( = the 5V power jumper)
 - extra-tall female socket to match raspberry GPIO header (2x20, RM2.54): 1x (***)
 - spacer/standoff (M3) (to match the 2x20 header): 2x (c. 20mm for pi B+, pi 2)

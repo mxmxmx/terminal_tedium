@@ -60,7 +60,7 @@
 - crystal 12.288 MHz 						1x (HC-49/S low profile) 
 - electolyic capacitor (10uF)				2x (= DC block / output)
 - 10uH inductance 	    	    			1x (e.g. mouser # 542-78F100-RC)
-- +5v DC/DC regulator RECOM 785.0 1.0.     	1x (mouser # 919-R-785.0-1.0) (****)
+- +5v DC/DC regulator RECOM 785.0 1.0.     	1x (mouser # 919-R-785.0-1.0) (††††)
 - LEDs  2x (ultrabright) 
 
 ==============================

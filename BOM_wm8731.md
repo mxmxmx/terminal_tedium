@@ -1,35 +1,22 @@
-###/* BOM for terminal tedium IO */###
+#BOM for terminal tedium IO 
 
 
-- #resistors 0603:#
+###resistors 0603:###
 
-200R            	2x 
-
-220R filter bead    4x (BLM18BB221SN1D, mouser # 81-BLM18BB221SN1D)
-
-510R            	5x
-
-1k 					4x
-
-4k7					2x 
-
-5k6        		    2x
-
-10k 				2x
-
-24k9 				12x
-
-27k					2x 
-
-33k 				5x
-
-47k                 5x 
-
-49k9 				2x (or use 47k)
-
-100k 				14x  
-
-led resistors:      2x (for 3mm LED) (*) 
+- 200R            	2x 
+- 220R filter bead    4x (BLM18BB221SN1D, mouser # 81-BLM18BB221SN1D)
+- 510R            	5x
+- 1k 					4x
+- 4k7					2x 
+- 5k6        		    2x
+- 10k 				2x
+- 24k9 				12x
+- 27k					2x 
+- 33k 				5x
+- 47k                 5x 
+- 49k9 				2x (or use 47k)
+- 100k 				14x  
+- led resistors:      2x (for 3mm LED) (*) 
 
 ==============================
 

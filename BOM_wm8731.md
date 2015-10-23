@@ -20,44 +20,44 @@
 
 ==============================
 
-- #caps 0603 (16v or better):#
+###caps 0603 (16v or better):###
 
-18-20p			 6x (NP0/C0G) 
-1n 				 6x (NP0/C0G)  	 
-10n 			 1x 
-100n 			14x 
-330n             1x
-470n 			 3x
-1uF				 1x (may be 0805)
-10uF			 2x (may be 0805)
+- 18-20p			6x (NP0/C0G) 
+- 1n 				6x (NP0/C0G)  	 
+- 10n 				1x 
+- 100n 				14x 
+- 330n 				1x
+- 470n 				3x
+- 1uF 				1x (may be 0805)
+- 10uF 				2x (may be 0805)
 
 ==============================
 
-- #electrolytic caps, SMD (25V or better):#
+###electrolytic caps, SMD (25V or better):###
 
 - 10uF 			 3x (diameter < 5.3mm)
 - 33uF 			 3x (diameter < 8mm)
 
 ==============================
 
-- #ICs/semis/etc:#
+###ICs/semis/etc:###
 
-WM8731  (TSSOP-28):  1x  (mouser # 595-)
-MCP3208 (SOIC16): 	 1x  (mouser # 579-MCP3208CISL)
-TL072 (SOIC8):    	 3x  (**)
-MCP6002 (SOIC8):  	 1x
-MCP6004 (SOIC14): 	 1x
+- WM8731  (TSSOP-28): 		1x  (mouser # 595-)
+- MCP3208 (SOIC16):			1x  (mouser # 579-MCP3208CISL)
+- TL072 (SOIC8):			3x  (**)
+- MCP6002 (SOIC8):			1x
+- MCP6004 (SOIC14):			1x
 
 
-NPN transistors (MMBT3904): 4x 
-SM5817 Schottky diodes: 3x (or use 1206 ferrit bead, rated 1A)
-ADP150 regulator (3v3, TSOT): 1x (mouser # 584-ADP150AUJZ-3.3R7)
-LM4040-2v5 (SOT-23) : 1x
-LM4040-10v (SOT-23) : 1x
+- NPN transistors (MMBT3904): 4x 
+- SM5817 Schottky diodes: 3x (or use 1206 ferrit bead, rated 1A)
+- ADP150 regulator (3v3, TSOT): 1x (mouser # 584-ADP150AUJZ-3.3R7)
+- LM4040-2v5 (SOT-23) : 1x
+- LM4040-10v (SOT-23) : 1x
 
 ==============================
 
-- #through-hole parts:#
+###through-hole parts:###
 
 - crystal 12.288 MHz 						1x (HC-49/S low profile) 
 - electolyic capacitor (10uF)				2x (= DC block / output)
@@ -67,7 +67,7 @@ LM4040-10v (SOT-23) : 1x
 
 ==============================
 
-- #misc:#
+###misc:###
 
 - jacks:			  16x (thonkiconn/kobiconn)
 - pots:				  6x  (9mm vertical; linear (50k-100k will do))
@@ -75,7 +75,6 @@ LM4040-10v (SOT-23) : 1x
 - illum. tact switch: 1x  (multimecs 5E/5G series) (e.g. mouser # 642-5GTH93542 (= YELLOW))
 + caps			- 2x  (multimecs “1SS09-15.0”) (mouser # 642-1SS09-15.0, or 642-1SS09-16.0)
 				- 1x  transparent (multimecs “1IS11-15.0”) (mouser # 642-1IS11-15.0, or 642-1IS11-16.0)
-
 
 - single row 2-pin male header (RM2.54) + little jumper plastic thingie to match (or use wire): 1x ( = the 5V power jumper)
 - extra-tall female socket to match raspberry GPIO header (2x20, RM2.54): 1x (***)

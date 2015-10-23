@@ -16,7 +16,7 @@
 - 47k                 5x 
 - 49k9 				2x (or use 47k)
 - 100k 				14x  
-- led resistors:      2x (for 3mm LED) (*) 
+- led resistors:      2x (for 3mm LED) (†) 
 
 ==============================
 
@@ -44,7 +44,7 @@
 
 - WM8731  (TSSOP-28): 		1x  (mouser # 595-)
 - MCP3208 (SOIC16):			1x  (mouser # 579-MCP3208CISL)
-- TL072 (SOIC8):			3x  (**)
+- TL072 (SOIC8):			3x  (††)
 - MCP6002 (SOIC8):			1x
 - MCP6004 (SOIC14):			1x
 - NPN transistors (MMBT3904): 4x
@@ -70,27 +70,28 @@
 - jacks:			  16x (thonkiconn/kobiconn)
 - pots:				  6x  (9mm vertical; linear (50k-100k will do))
 - tact switches: 	  2x  (multimecs 5E/5G series) (mouser # 642-5GTH935)
-- illum. tact switch: 1x  (multimecs 5E/5G series) (e.g. mouser # 642-5GTH93542 (= YELLOW))
+- illum. tact switch: 1x  (multimecs 5E/5G series) (e.g. mouser # 642-5GTH93542 (= YELLOW)) (†††††)
 - caps:
 	- 2x  (multimecs “1SS09-15.0”) (mouser # 642-1SS09-15.0, or 642-1SS09-16.0)
 	- 1x  transparent (multimecs “1IS11-15.0”) (mouser # 642-1IS11-15.0, or 642-1IS11-16.0)
 - single row 2-pin male header (RM2.54) + little jumper plastic thingie to match (or use wire): 1x ( = the 5V power jumper)
-- extra-tall female socket to match raspberry GPIO header (2x20, RM2.54): 1x (***)
+- extra-tall female socket to match raspberry GPIO header (2x20, RM2.54): 1x (†††)
 - spacer/standoff (M3) (to match the 2x20 header): 2x (c. 20mm for pi B+, pi 2)
 
 ==============================
 
 ###notes:###
 
-(*) i'd use ultrabright 3mm leds, and correspondingly large resistor values (to taste) (V+ = 3.3v); for the illuminated button, 200R works ok (as per BOM)
+(†) i'd use ultrabright 3mm leds, and correspondingly large resistor values (to taste) (V+ = 3.3v); for the illuminated button, 200R works ok (as per BOM)
 
-(**) two of the TL072s are in the audio path — if you’d like to use something better for the output stage, eg. stuff like OPA1662, AD8599, or LME49720.
+(††) two of the TL072s are in the audio path — if you’d like to use something better for the output stage, eg. stuff like OPA1662, AD8599, or LME49720.
 
-(***) four of these, for example, will do : http://www.taydaelectronics.com/connectors-sockets/stackable-headers/stackable-header-10-pins-2-54mm.html ; 
+(†††) four of these, for example, will do : http://www.taydaelectronics.com/connectors-sockets/stackable-headers/stackable-header-10-pins-2-54mm.html ; 
 if planning to use model A+, they don't have to be as tall. 
 
-(****) the 500 ma version should do for models a+, b+; pi 2 needs 1.0, it looks like; as a cheaper/less efficient solution, use a 7805. if planning to power the raspberry via usb (= 5v disconnected! or no 5V regulator soldered), no such $ regulator is needed, of course.
+(††††) the 500 ma version should do for models a+, b+; pi 2 needs 1.0, it looks like; as a cheaper/less efficient solution, use a 7805. if planning to power the raspberry via usb (= 5v disconnected! or no 5V regulator soldered), no such $ regulator is needed, of course.
 
+(†††††) NB: these are crazy expensive at mouser etc; much cheaper to source them at soselectronic.com
 
 
 

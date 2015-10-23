@@ -1,8 +1,6 @@
 externals for mcp3208 + GPIO / terminal tedium
 ===========================================================
 
-*usage:*
-
 
 **ADC:**
 
@@ -23,9 +21,9 @@ externals for mcp3208 + GPIO / terminal tedium
    [tedium_output 0 0]
 
 ```
-left inlet: nc / second inlet: gate #1 (top) / right inlet: gate #2 (bottom). 
+first inlet: nc / second inlet: gate #1 (top) / third inlet: gate #2 (bottom). 
 
-sending "1" turns the gate on, sending "0" off; the two arguments determine the initial state (0 = off, 1 = on).
+sending < 1 > turns the gate on, sending < 0 > off; the two arguments determine the initial state (0 = off, 1 = on).
 
 **gate/switch inputs:** 
 
@@ -39,13 +37,16 @@ where GPIO_num = 4, 17, 2, 3, 23, 24, or 25. outputs bang.
 ====================================================================================
 
 
-*compile with:*
+**compile with:**
 
 `gcc -O3 -Wall -c [name_of_external].c -o [name_of_external].o`
 
 `ld --export-dynamic -shared -o [name_of_external].pd_linux [name_of_external].o -lc -lm -lwiringPi`
 
-then move into externals folder, eg: 
+then move things into externals folder, eg: 
 
 `sudo mv [name_of_external].pd_linux /usr/lib/pd/extra/`
 
+**osx_dummies**
+
+same thing, but non-functional ... for use on osx. 

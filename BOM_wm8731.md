@@ -35,7 +35,7 @@
 
 ###electrolytic caps, SMD (25V or better):###
 
-- 10uF 			 4x (diameter < 5.3mm)
+- 10uF 			 5x (diameter < 5.3mm)
 - 33uF 			 3x (diameter < 8mm)
 
 ==============================

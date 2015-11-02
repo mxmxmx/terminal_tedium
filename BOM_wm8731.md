@@ -35,7 +35,7 @@
 
 ###electrolytic caps, SMD (25V or better):###
 
-- 10uF 			 3x (diameter < 5.3mm)
+- 10uF 			 4x (diameter < 5.3mm)
 - 33uF 			 3x (diameter < 8mm)
 
 ==============================
@@ -84,7 +84,7 @@
 
 (†) i'd use ultrabright 3mm leds, and correspondingly large resistor values (to taste) (V+ = 3.3v); for the illuminated button, 200R works ok (as per BOM)
 
-(††) two of the TL072s are in the audio path — if you’d like to use something better for the output stage, eg. stuff like OPA1662, AD8599, or LME49720.
+(††) two of the TL072s are in the audio path — if you’d like to use something better for the output stage, eg. stuff like OPA1662 or LME49720.
 
 (†††) four of these, for example, will do : http://www.taydaelectronics.com/connectors-sockets/stackable-headers/stackable-header-10-pins-2-54mm.html ; 
 if planning to use model A+, they don't have to be as tall. 

@@ -15,15 +15,12 @@ raspberry pi 2 / pi a+ / b+  eurorack stereo DAC (PCM5102a) or codec (wm8731) br
 
 build info, see here: https://github.com/mxmxmx/terminal_tedium/wiki
 
-## pin usage
+## pin usage:
 
-###wm8731 :
+### wm8731 (blue) / pcm5102a (pink) : 
 
-![My image](https://c1.staticflickr.com/1/574/22746127472_a8526f5235_c.jpg)
+![My image](https://c1.staticflickr.com/1/574/22746127472_0a0b691900_b.jpg)
 
-###pcm5102a :
-
-![My image](https://farm6.staticflickr.com/5602/15151692744_667437ae88_b.jpg)
 
 
 cf. muffwiggler.com for more details:

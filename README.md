@@ -15,10 +15,15 @@ raspberry pi 2 / pi a+ / b+  eurorack stereo DAC (PCM5102a) or codec (wm8731) br
 
 build info, see here: https://github.com/mxmxmx/terminal_tedium/wiki
 
-the 'teensy tedium' folder has gerbers + test sketch for a teensy 3.x adapter (to be used instead of the rpi, if desired)
+## pin usage
+
+###wm8731 :
+
+![My image](https://c1.staticflickr.com/1/574/22746127472_a8526f5235_b.jpg)
+
+###pcm5102a :
 
 ![My image](https://farm6.staticflickr.com/5602/15151692744_667437ae88_b.jpg)
-
 
 
 cf. muffwiggler.com for more details:
@@ -26,3 +31,4 @@ cf. muffwiggler.com for more details:
 http://www.muffwiggler.com/forum/viewtopic.php?t=104896&postdays=0&postorder=asc&start=0
 
 * pi 2 draws more power, so is less suitable from that perspective. 
+* the 'teensy tedium' folder has gerbers + test sketch for a teensy 3.x adapter (to be used instead of the rpi, if desired. only works with pcm5102a version)

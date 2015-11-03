@@ -19,7 +19,7 @@ build info, see here: https://github.com/mxmxmx/terminal_tedium/wiki
 
 ###wm8731 :
 
-![My image](https://c1.staticflickr.com/1/574/22746127472_a8526f5235_b.jpg)
+![My image](https://c1.staticflickr.com/1/574/22746127472_a8526f5235_c.jpg)
 
 ###pcm5102a :
 

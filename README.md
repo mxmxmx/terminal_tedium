@@ -19,7 +19,7 @@ build info, see here: https://github.com/mxmxmx/terminal_tedium/wiki
 
 ### wm8731 (blue) / pcm5102a (pink) : 
 
-![My image](https://c1.staticflickr.com/1/574/22746127472_0a0b691900_b.jpg)
+![My image](https://c1.staticflickr.com/1/574/22746127472_95676d8e11_b.jpg)
 
 
 

@@ -85,7 +85,7 @@
 
 ###notes:###
 
-(‡) the tantalum capacitor replaces one of 22uF electrolytics (see build doc), as it sits in the way (duh). NB this is for the 12V bus, ##so make sure to get a cap with adequate voltage rating.## typically, for use with 12V that will mean at least 25V or above (check the datasheet of the capacitor to find out).
+(‡) the tantalum capacitor replaces one of 22uF electrolytics (see build doc), as it sits in the way (duh). NB this is for the 12V bus, so make sure to get a cap with adequate voltage rating! typically, for use with 12V that will mean at least 25V or above (check the datasheet of the capacitor to find out).
 
 (†) i'd use ultrabright 3mm leds, and correspondingly large resistor values (to taste) (V+ = 3.3v); for the illuminated button, 200R works ok (as per BOM)
 

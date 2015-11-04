@@ -175,17 +175,22 @@ static int terminal_tedium_adc_write_read(t_terminal_tedium_adc *spi, unsigned c
     struct spi_ioc_transfer spid[length];
     int i = 0;
     int retVal = -1; 
+
  
   // one spi transfer for each byte
     for (i = 0 ; i < length ; i++){
- 
+      
+        memset (&spi[i], 0x00, sizeof (spi[i]));
         spid[i].tx_buf        = (unsigned long)(data + i); // transmit from "data"
         spid[i].rx_buf        = (unsigned long)(data + i); // receive into "data"
         spid[i].len           = sizeof(*(data + i));
-        spid[i].delay_usecs   = 0;
+        //spid[i].delay_usecs   = 0;
         spid[i].speed_hz      = spi->speed;
         spid[i].bits_per_word = spi->bitsPerWord;
-        spid[i].cs_change     = 0;
+        //spid[i].cs_change     = 0;
+        //spid[i].tx_nbits      = 0;
+        //spid[i].rx_nbits      = 0;
+        //spid[i].pad           = 0;
     }
  
     retVal = ioctl(spi->spifd, SPI_IOC_MESSAGE(length), &spid);
@@ -222,11 +227,11 @@ static void terminal_tedium_adc_bang(t_terminal_tedium_adc *spi)
   uint8_t input_mode = 1;
   for (a2dChannel = 0; a2dChannel < 8; a2dChannel++) {
 
-    data[0] =  0x04;    //  first byte transmitted -> start bit
-    data[0] |= input_mode<<1;
-    data[0] |= (a2dChannel>>2) & 0x01;
-    data[1] =   a2dChannel<<6;
-    data[2] =  0x00;
+    data[0]  =  0x04;    //  first byte transmitted -> start bit
+    data[0] |=  input_mode<<1;
+    data[0] |=  (a2dChannel>>2) & 0x01;
+    data[1]  =  a2dChannel<<6;
+    data[2]  =  0x00;
 
     terminal_tedium_adc_write_read(spi, data, 3);
 

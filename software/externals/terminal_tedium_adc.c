@@ -268,7 +268,7 @@ static t_terminal_tedium_adc *terminal_tedium_adc_new(t_symbol *devspi){
       spi->mode = 0x0;
     #endif   
     spi->bitsPerWord = 8;
-    spi->speed = 1000000;
+    spi->speed = 4000000;
     spi->spifd = -1;
  
     return(spi);

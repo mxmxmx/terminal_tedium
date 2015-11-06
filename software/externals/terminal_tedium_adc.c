@@ -180,7 +180,11 @@ static int terminal_tedium_adc_write_read(t_terminal_tedium_adc *spi, unsigned c
   // one spi transfer for each byte
     for (i = 0 ; i < length ; i++){
       
+<<<<<<< HEAD
         memset (&spid[i], 0x0, sizeof (spid[i]));
+=======
+        memset (&spid[i], 0x00, sizeof (spid[i]));
+>>>>>>> FETCH_HEAD
         spid[i].tx_buf        = (unsigned long)(data + i); // transmit from "data"
         spid[i].rx_buf        = (unsigned long)(data + i); // receive into "data"
         spid[i].len           = sizeof(*(data + i));

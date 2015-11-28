@@ -23,9 +23,9 @@ build info, see here: https://github.com/mxmxmx/terminal_tedium/wiki
 
 
 
-cf. muffwiggler.com for more details:
+see ![muffwiggler.com](http://www.muffwiggler.com/forum/viewtopic.php?t=104896&postdays=0&postorder=asc&start=0) for more details.
 
-http://www.muffwiggler.com/forum/viewtopic.php?t=104896&postdays=0&postorder=asc&start=0
+
 
 * pi 2 draws more power, so is less suitable from that perspective. 
 * the 'teensy tedium' folder has gerbers + test sketch for a teensy 3.x adapter (to be used instead of the rpi, if desired. only works with pcm5102a version)

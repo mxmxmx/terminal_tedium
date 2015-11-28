@@ -23,7 +23,7 @@ build info, see here: https://github.com/mxmxmx/terminal_tedium/wiki
 
 
 
-see ![muffwiggler.com](http://www.muffwiggler.com/forum/viewtopic.php?t=104896&postdays=0&postorder=asc&start=0) for more details.
+see [muffwiggler.com](http://www.muffwiggler.com/forum/viewtopic.php?t=104896&postdays=0&postorder=asc&start=0) for more details.
 
 
 

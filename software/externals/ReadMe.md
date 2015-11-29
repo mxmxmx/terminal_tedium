@@ -23,7 +23,7 @@ externals for mcp3208 + GPIO / terminal tedium
 ```
 inlet: 
 
-sending < 1 > turns the gate on, sending < 0 > off; the creation arguments gives the pin number (<GPIO_num> = 12, 16, or 26)
+sending < 1 > turns the gate on, sending < 0 > off; the creation arguments gives the pin number, where GPIO_num = 12, 16, or 26.
 
 **gate/switch inputs:** 
 

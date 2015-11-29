@@ -16,14 +16,14 @@ externals for mcp3208 + GPIO / terminal tedium
 **gate outputs:**
 
 ```
-              o      o
-              |      |
-   [tedium_output 0 0]
+   [1 (     
+   |    
+   [tedium_output <GPIO_num>]
 
 ```
-first inlet: nc / second inlet: gate #1 (top) / third inlet: gate #2 (bottom). 
+inlet: 
 
-sending < 1 > turns the gate on, sending < 0 > off; the two arguments determine the initial state (0 = off, 1 = on).
+sending < 1 > turns the gate on, sending < 0 > off; the creation arguments gives the pin number (<GPIO_num> = 12, 16, or 26)
 
 **gate/switch inputs:** 
 

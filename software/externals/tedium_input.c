@@ -35,7 +35,7 @@ void *tedium_input_new(t_floatarg _pin)
 	t_tedium_input *x = (t_tedium_input *)pd_new(tedium_input_class);
 	x->x_clock = clock_new(x, (t_method)tedium_input_tick);
 	// valid pin?
-	if (_pin == 4 || _pin == 17 || _pin == 2 || _pin == 3 || _pin == 23 || _pin == 24 || _pin == 25) x->pinNum = _pin;
+	if (_pin == 4 || _pin == 17 || _pin == 2 || _pin == 3 || _pin == 14 || _pin == 27 || _pin == 23 || _pin == 24 || _pin == 25) x->pinNum = _pin;
 	else x->pinNum = 4; // default to pin #4	
 	#ifdef __arm__
 		pinMode(x->pinNum, INPUT);

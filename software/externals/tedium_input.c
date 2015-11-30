@@ -1,4 +1,4 @@
-/* NB: pullups need to be set externally */
+/* NB: pullups need to be set for the inputs to work */
 
 
 #include "m_pd.h"

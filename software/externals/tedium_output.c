@@ -25,7 +25,7 @@ typedef struct _tedium_output
 void tedium_output_gate(t_tedium_output *x, t_floatarg _gate)
 {
 	if (_gate > 0)	x->clkState = 1; 
-	else			x->clkState = 0;
+	else		x->clkState = 0;
 	#ifdef __arm__
 		digitalWrite(x->pinNum, x->clkState);
 	#endif
@@ -41,7 +41,7 @@ void *tedium_output_new(t_floatarg _pin)
 	#ifdef __arm__
 		pinMode(x->pinNum, OUTPUT);
 	#endif
-    x->clkState = 0;
+		x->clkState = 0;
 	return (void *)x;
 }
 

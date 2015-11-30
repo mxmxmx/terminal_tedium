@@ -39,9 +39,8 @@ void *tedium_input_new(t_floatarg _pin)
 	else x->pinNum = 4; // default to pin #4	
 	#ifdef __arm__
 		pinMode(x->pinNum, INPUT);
+		pullUpDnControl(x->pinNum, PUD_UP);
 	#endif
-	// int x_pin = x->pinNum;
-	// fprintf(stderr,"pin <%d>\n", x_pin);
 	x->x_out = outlet_new(&x->x_obj, gensym("bang"));
 	tedium_input_tick(x);
 	return (void *)x;

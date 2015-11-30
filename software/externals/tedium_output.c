@@ -41,7 +41,7 @@ void *tedium_output_new(t_floatarg _pin)
 	#ifdef __arm__
 		pinMode(x->pinNum, OUTPUT);
 	#endif
-		x->clkState = 0;
+	x->clkState = 0;
 	return (void *)x;
 }
 

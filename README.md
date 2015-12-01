@@ -10,10 +10,14 @@ raspberry pi 2 / zero / pi a+ / b+  eurorack stereo DAC (PCM5102a) or codec (wm8
 - 2x digital outputs (~ 6V )
 - 6x resp. 8x CV inputs (100k input impedance; 12 bit, +/- 5V range)
 - 2x audio outputs (10VPP, 16bit / 48kHz)
-- 2x audio inputs (50k input impedance -- wm8731 only)
+- 2x audio inputs (50k input impedance, 16bit / 48kHz -- wm8731 only)
 
 
 build info, see here: https://github.com/mxmxmx/terminal_tedium/wiki
+
+
+![My image](https://c2.staticflickr.com/6/5707/23442168685_43409c4630_b.jpg)
+
 
 ## pin usage:
 

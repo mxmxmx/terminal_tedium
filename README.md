@@ -16,7 +16,7 @@ raspberry pi 2 / zero / pi a+ / b+  eurorack stereo DAC (PCM5102a) or codec (wm8
 build info, see here: https://github.com/mxmxmx/terminal_tedium/wiki
 
 
-![My image](https://c2.staticflickr.com/6/5707/23442168685_43409c4630_b.jpg)
+![My image](https://c2.staticflickr.com/6/5707/23442168685_43409c4630_c.jpg)
 
 
 ## pin usage:

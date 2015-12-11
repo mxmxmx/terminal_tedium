@@ -4,13 +4,26 @@ externals for mcp3208 + GPIO / terminal tedium
 
 **ADC:**
 
+wm8731 version (6 channels): 
+
 ```
 [open(
 |
 [terminal_tedium_adc]
 |  |  |  |  |  |  |  | 
-[ADC0]  [ADC1]  	[etc]
+[ADC0]  [ADC1]  ... 	[ADC5]
 ```
+
+pcm5102a version (8 channels): 
+
+```
+[open adc(
+|
+[terminal_tedium_adc]
+|  |  |  |  |  |  |  | 
+[ADC0]  [ADC1]  ... 	[ADC7]
+```
+
 message "open" opens the device. reads ADC when banged. (NB: plain `[open(` is for use with the wm8731 version (in which case, we only need to read 6 ADC channels. use `[open adc(` for use with the pcm5102a version, in which case all 8 channels need to be read.)
 
  

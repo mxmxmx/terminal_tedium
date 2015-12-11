@@ -44,88 +44,90 @@ typedef struct _terminal_tedium_adc
     t_outlet *x_out7;
     t_outlet *x_out8;
     t_outlet *x_out9;
-    t_symbol *spidev;
     unsigned char mode;
     unsigned char bitsPerWord;
     unsigned int speed;
     int spifd;
+    int _version;
 } t_terminal_tedium_adc;
 
-static t_terminal_tedium_adc *terminal_tedium_adc_new(t_symbol *devspi);
+static t_terminal_tedium_adc *terminal_tedium_adc_new(t_floatarg version);
 static int terminal_tedium_adc_write_read(t_terminal_tedium_adc *spi, unsigned char *data, int length);
-static void terminal_tedium_adc_open(t_terminal_tedium_adc *spi, t_symbol *devspi);
+static void terminal_tedium_adc_open(t_terminal_tedium_adc *spi, t_symbol *version);
 static int terminal_tedium_adc_close(t_terminal_tedium_adc *spi);
 static void terminal_tedium_adc_free(t_terminal_tedium_adc *spi);
 
 /**********************************************************
  * terminal_tedium_adc_open() :function is called by the "open" command
  * It is responsible for opening the spidev device
- * "devspi" and then setting up the spidev interface.
+ * and then setting up the spidev interface.
  * member variables are used to configure spidev.
  * They must be set appropriately before calling
  * this function.
  * *********************************************************/
-static void terminal_tedium_adc_open(t_terminal_tedium_adc *spi, t_symbol *devspi){
+static void terminal_tedium_adc_open(t_terminal_tedium_adc *spi, t_symbol *version){
 
-  #ifdef __arm__
+
     int statusVal = 0;
-    if (strlen(devspi->s_name) == 0) {
-      spi->spidev = gensym("/dev/spidev0.1");
-    } else {
-      spi->spidev = devspi;
-    }
-    spi->spifd = open(spi->spidev->s_name, O_RDWR);
-    if(spi->spifd < 0) {
-      statusVal = -1;
-      pd_error(spi, "could not open SPI device");
-      goto spi_output;
-    }
- 
-    statusVal = ioctl (spi->spifd, SPI_IOC_WR_MODE, &(spi->mode));
-    if(statusVal < 0){
-      pd_error(spi, "Could not set SPIMode (WR)...ioctl fail");
-      terminal_tedium_adc_close(spi);
-      goto spi_output;
-    }
- 
-    statusVal = ioctl (spi->spifd, SPI_IOC_RD_MODE, &(spi->mode));
-    if(statusVal < 0) {
-      pd_error(spi, "Could not set SPIMode (RD)...ioctl fail");
-      terminal_tedium_adc_close(spi);
-      goto spi_output;
-    }
- 
-    statusVal = ioctl (spi->spifd, SPI_IOC_WR_BITS_PER_WORD, &(spi->bitsPerWord));
-    if(statusVal < 0) {
-      pd_error(spi, "Could not set SPI bitsPerWord (WR)...ioctl fail");
-      terminal_tedium_adc_close(spi);
-      goto spi_output;
-    }
- 
-    statusVal = ioctl (spi->spifd, SPI_IOC_RD_BITS_PER_WORD, &(spi->bitsPerWord));
-    if(statusVal < 0) {
-      pd_error(spi, "Could not set SPI bitsPerWord(RD)...ioctl fail");
-      terminal_tedium_adc_close(spi);
-      goto spi_output;
-    }  
- 
-    statusVal = ioctl (spi->spifd, SPI_IOC_WR_MAX_SPEED_HZ, &(spi->speed));    
-    if(statusVal < 0) {
-      pd_error(spi, "Could not set SPI speed (WR)...ioctl fail");
-      terminal_tedium_adc_close(spi);
-      goto spi_output;
-    }
- 
-    statusVal = ioctl (spi->spifd, SPI_IOC_RD_MAX_SPEED_HZ, &(spi->speed));    
-    if(statusVal < 0) {
-      pd_error(spi, "Could not set SPI speed (RD)...ioctl fail");
-      terminal_tedium_adc_close(spi);
-      goto spi_output;
-    }
- spi_output:
-    if (!statusVal) statusVal = 1;
-    else statusVal = 0;
-    outlet_float(spi->x_out9, statusVal);  
+    
+    if (strlen(version->s_name) == 0) spi->_version = 0x0; // = wm8731 version
+    else spi->_version = 0x1; // = pcm5102a version
+
+    #ifdef __arm__
+      // we're using CS1 :
+      spi->spifd =  open("/dev/spidev0.1", O_RDWR); 
+
+      if(spi->spifd < 0) {
+        statusVal = -1;
+        pd_error(spi, "could not open SPI device");
+        goto spi_output;
+      }
+   
+      statusVal = ioctl (spi->spifd, SPI_IOC_WR_MODE, &(spi->mode));
+      if(statusVal < 0){
+        pd_error(spi, "Could not set SPIMode (WR)...ioctl fail");
+        terminal_tedium_adc_close(spi);
+        goto spi_output;
+      }
+   
+      statusVal = ioctl (spi->spifd, SPI_IOC_RD_MODE, &(spi->mode));
+      if(statusVal < 0) {
+        pd_error(spi, "Could not set SPIMode (RD)...ioctl fail");
+        terminal_tedium_adc_close(spi);
+        goto spi_output;
+      }
+   
+      statusVal = ioctl (spi->spifd, SPI_IOC_WR_BITS_PER_WORD, &(spi->bitsPerWord));
+      if(statusVal < 0) {
+        pd_error(spi, "Could not set SPI bitsPerWord (WR)...ioctl fail");
+        terminal_tedium_adc_close(spi);
+        goto spi_output;
+      }
+   
+      statusVal = ioctl (spi->spifd, SPI_IOC_RD_BITS_PER_WORD, &(spi->bitsPerWord));
+      if(statusVal < 0) {
+        pd_error(spi, "Could not set SPI bitsPerWord(RD)...ioctl fail");
+        terminal_tedium_adc_close(spi);
+        goto spi_output;
+      }  
+   
+      statusVal = ioctl (spi->spifd, SPI_IOC_WR_MAX_SPEED_HZ, &(spi->speed));    
+      if(statusVal < 0) {
+        pd_error(spi, "Could not set SPI speed (WR)...ioctl fail");
+        terminal_tedium_adc_close(spi);
+        goto spi_output;
+      }
+   
+      statusVal = ioctl (spi->spifd, SPI_IOC_RD_MAX_SPEED_HZ, &(spi->speed));    
+      if(statusVal < 0) {
+        pd_error(spi, "Could not set SPI speed (RD)...ioctl fail");
+        terminal_tedium_adc_close(spi);
+        goto spi_output;
+      }
+   spi_output:
+      if (!statusVal) statusVal = 1;
+      else statusVal = 0;
+      outlet_float(spi->x_out9, statusVal);  
  #endif
 }
 
@@ -135,13 +137,16 @@ static void terminal_tedium_adc_open(t_terminal_tedium_adc *spi, t_symbol *devsp
  
 static int terminal_tedium_adc_close(t_terminal_tedium_adc *spi){
 
-  #ifdef __arm__
     int statusVal = -1;
     if (spi->spifd == -1) {
       pd_error(spi, "terminal_tedium_adc: device not open");
       return(-1);
     }
+  #ifdef __arm__ 
     statusVal = close(spi->spifd);
+  #else 
+    statusVal = 0x0;
+  #endif  
     if(statusVal < 0) {
       pd_error(spi, "terminal_tedium_adc: could not close SPI device");
       exit(1);
@@ -149,9 +154,6 @@ static int terminal_tedium_adc_close(t_terminal_tedium_adc *spi){
     outlet_float(spi->x_out9, 0);
     spi->spifd = -1;
     return(statusVal);
-  #else 
-    return 0x0;
-  #endif
 }
 
 /********************************************************************
@@ -193,10 +195,10 @@ static int terminal_tedium_adc_write_read(t_terminal_tedium_adc *spi, unsigned c
     if(retVal < 0){
        pd_error(spi, "problem transmitting spi data..ioctl");
     }
+  #else // dummy crap
+    int retVal = length + spi->speed + sizeof(*(data));
+  #endif
     return retVal;
-  #else 
-    return 0x0;
-  #endif  
 }
 
 /***********************************************************************
@@ -216,11 +218,14 @@ static void terminal_tedium_adc_bang(t_terminal_tedium_adc *spi)
   #else 
       return;
   #endif
+
   int a2dVal[8];
   int a2dChannel = 0;
   unsigned char data[3];
   uint8_t input_mode = 1;
-  for (a2dChannel = 0; a2dChannel < 8; a2dChannel++) {
+  int numChannels = spi->_version ? 0x8 : 0x6 ; // 8 channels for pcm5102a, 6 channels for wm8731 version
+
+  for (a2dChannel = 0; a2dChannel < numChannels; a2dChannel++) {
 
     data[0]  =  0x04;    //  first byte transmitted -> start bit
     data[0] |=  input_mode<<1;
@@ -234,24 +239,34 @@ static void terminal_tedium_adc_bang(t_terminal_tedium_adc *spi)
     a2dVal[a2dChannel] = 0xFFF - (((data[1] & 0x0f) << 0x08) | data[2]); 
    
   }
-  // .. and map to panel : 
-  outlet_float(spi->x_out8, a2dVal[2]);
-  outlet_float(spi->x_out7, a2dVal[3]);
-  outlet_float(spi->x_out6, a2dVal[0]);
-  outlet_float(spi->x_out5, a2dVal[7]);
-  outlet_float(spi->x_out4, a2dVal[4]);
-  outlet_float(spi->x_out3, a2dVal[1]);
-  outlet_float(spi->x_out2, a2dVal[6]);
-  outlet_float(spi->x_out1, a2dVal[5]);
+ 
+  if (numChannels < 0x7) {  // wm8731 :
+     
+      outlet_float(spi->x_out6, a2dVal[5]);
+      outlet_float(spi->x_out5, a2dVal[4]);
+      outlet_float(spi->x_out4, a2dVal[3]);
+      outlet_float(spi->x_out3, a2dVal[2]);
+      outlet_float(spi->x_out2, a2dVal[1]);
+      outlet_float(spi->x_out1, a2dVal[0]);
+  }
+  else { // map to panel (pcm5102a): 
+      outlet_float(spi->x_out8, a2dVal[2]);
+      outlet_float(spi->x_out7, a2dVal[3]);
+      outlet_float(spi->x_out6, a2dVal[0]);
+      outlet_float(spi->x_out5, a2dVal[7]);
+      outlet_float(spi->x_out4, a2dVal[4]);
+      outlet_float(spi->x_out3, a2dVal[1]);
+      outlet_float(spi->x_out2, a2dVal[6]);
+      outlet_float(spi->x_out1, a2dVal[5]);
+  }
 }
 
 /*************************************************
  * init function.
  * ***********************************************/
-static t_terminal_tedium_adc *terminal_tedium_adc_new(t_symbol *devspi){
+static t_terminal_tedium_adc *terminal_tedium_adc_new(t_floatarg version){
     t_terminal_tedium_adc *spi = (t_terminal_tedium_adc *)pd_new(terminal_tedium_adc_class);
-    //fprintf(stderr,"devspi<%s>\n", devspi->s_name); 
-    //t_terminal_tedium_adc *a2d = terminal_tedium_adc_new("/dev/spidev0.0", spi_MODE_0, 1000000, 8);
+
     spi->x_out1 = outlet_new(&spi->x_obj, gensym("float"));
     spi->x_out2 = outlet_new(&spi->x_obj, gensym("float"));
     spi->x_out3 = outlet_new(&spi->x_obj, gensym("float"));
@@ -261,7 +276,6 @@ static t_terminal_tedium_adc *terminal_tedium_adc_new(t_symbol *devspi){
     spi->x_out7 = outlet_new(&spi->x_obj, gensym("float"));
     spi->x_out8 = outlet_new(&spi->x_obj, gensym("float"));
     spi->x_out9 = outlet_new(&spi->x_obj, gensym("float"));
-    spi->spidev = devspi;
     #ifdef __arm__ 
       spi->mode = SPI_MODE_0;
     #else
@@ -270,6 +284,7 @@ static t_terminal_tedium_adc *terminal_tedium_adc_new(t_symbol *devspi){
     spi->bitsPerWord = 8;
     spi->speed = 4000000;
     spi->spifd = -1;
+    spi->_version = version; // 
  
     return(spi);
 }

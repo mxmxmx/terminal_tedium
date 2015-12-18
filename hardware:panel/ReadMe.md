@@ -1,6 +1,6 @@
 # this folder contains various CAM files and design resources.
 
-- ###gerbers is, surprise, where the gerber files can be found. at this point, i'd recommend building the wm8731 version; it's more versatile. 
+- ### the `gerbers` folder is, unsurprisingly, where the gerber files can be found. at this point, i'd recommend building the wm8731 version; it's more versatile. 
 
 - the remaining stuff is mostly about panels, ie layout + dimensions:
 

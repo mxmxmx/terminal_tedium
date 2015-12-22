@@ -114,7 +114,6 @@ uint16_t readADC(int _channel, uint16_t *adc_val){
         *(adc_val + _channel) = result ;
         return 1;
       }
-
       else {
         *(adc_val + _channel)  = tmp;
         return 0;

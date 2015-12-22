@@ -1,9 +1,32 @@
-# OSC / UDP client
+# (primitive) OSC / UDP client
 
-compile with: 
+- atm, works with wm8731 version only.
 
-gcc *.c -Werror -lwiringPi -std=c99 -O2 -g -o tedium_osc 
+- atm, still needs adjusting port # and IP address manually  (in `int main(void)` / main.c)
 
-run with:
+- compile with: 
 
-sudo ./tedium_osc 
+`gcc *.c -Werror -lwiringPi -std=c99 -O2 -g -o tedium_osc` 
+
+- run with:
+
+`sudo ./tedium_osc`
+
+- adc values are sent as bundle: 
+
+`/adc0 value, /adc1 value, /adc2 value ... `
+
+- buttons and triggers sent as messages, ie:
+
+`/trigger1 value`
+`/trigger2 value`
+`/trigger3 value`
+`/trigger4 value`
+
+`/button1 value`
+`/button2 value`
+`/button3 value`
+
+- button3 is latching (LED); buttons 1 and 2 momentary.
+
+

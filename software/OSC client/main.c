@@ -194,7 +194,6 @@ int main(void)
             _wait = 0; // reset counter
 
             // get adc values
-
             for (int i = 0; i < ADC_NUM_CHANNELS; i++) {
     	         _send += readADC(i, adc);
             }

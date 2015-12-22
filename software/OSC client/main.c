@@ -2,9 +2,6 @@
 *
 *   terminal tedium / OSC client (UDP)
 *
-*   - sends adc values as bundle: /adc0, /adc1, /adc2, /adc3, /adc4, /adc5
-*   - sends buttons as message:   /button1, /button2, /button3 (button 3 is latching)
-*   - sends triggers as message:  /trigger1, /trigger2, /trigger3, /trigger4
 *     
 *   - TD: gate outputs (?); long press; make nicer. etc
 *   - TD: proper timing / get rid of counters
@@ -100,10 +97,10 @@ mcp3208 : return 1 if we need to send OSC, 0 otherwise
 
 uint16_t readADC(int _channel, uint16_t *adc_val){ 
 
-    	uint8_t spi_data[3];
-    	uint16_t result, tmp = *(adc_val + _channel); // previous.
+      uint8_t spi_data[3];
+      uint16_t result, tmp = *(adc_val + _channel); // previous.
 
-    	spi_data[0] = 0x06 | (_channel>>2) & 0x01;    // single ended
+      spi_data[0] = 0x06 | (_channel>>2) & 0x01;    // single ended
       spi_data[1] = _channel<<6;
       spi_data[2] = 0x00;
 
@@ -187,15 +184,17 @@ int main(void)
     // flags
     int _wait = 0, _send = 0, toggle = 0;
 
+    // main action is happening here (..)
      while(1)
     {
 
     	if (_wait < TIMEOUT) _wait++;
     	else {
 
-        	  _wait = 0; // reset counter
+            _wait = 0; // reset counter
 
             // get adc values
+
             for (int i = 0; i < ADC_NUM_CHANNELS; i++) {
     	         _send += readADC(i, adc);
             }

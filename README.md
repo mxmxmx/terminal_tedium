@@ -31,5 +31,4 @@ see [muffwiggler.com](http://www.muffwiggler.com/forum/viewtopic.php?t=104896&po
 
 
 
-* pi 2 draws more power, so is less suitable from that perspective. 
-* the 'teensy tedium' folder has gerbers + test sketch for a teensy 3.x adapter (to be used instead of the rpi, if desired. only works with pcm5102a version)
+* NB: pi 2 draws more power, so is less suitable from that perspective. 

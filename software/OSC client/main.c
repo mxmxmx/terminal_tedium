@@ -35,6 +35,8 @@ const uint32_t TIMEOUT_T = 1000;   // short time out (for OSC off messages) (tri
 #define ADC_NUM_CHANNELS 6
 #define RESOLUTION 4095
 #define DEADBAND 2
+#define SCALE 4000
+#define SCALE_INV 1.0f/(float)SCALE
 
 // GPIO : 
 
@@ -107,7 +109,7 @@ uint16_t readADC(int _channel, uint16_t *adc_val){
       wiringPiSPIDataRW(ADC_SPI_CHANNEL, spi_data, 3);
 
       // invert + limit result: 
-      result = 4000 - (((spi_data[1] & 0x0f) << 8) | spi_data[2]);
+      result = SCALE - (((spi_data[1] & 0x0f) << 8) | spi_data[2]);
       result = result > RESOLUTION ? 0 : result;  
       
       if ( (result - tmp) > DEADBAND || (tmp - result) > DEADBAND ) { 
@@ -129,7 +131,7 @@ int main(void)
     int s, i, slen = sizeof(_serv);
     char buf[BUFLEN];
     int port = 9000;
-    char *ip = "192.168.0.18";
+    char *ip = "192.168.0.18"; // "127.0.0.1"
 
     memset(adc, 0, ADC_NUM_CHANNELS);
 
@@ -202,12 +204,12 @@ int main(void)
               
                   // construct OSC bundle:
                   tosc_writeBundle(&bundle, NOW, buf, BUFLEN);
-                  tosc_writeNextMessage(&bundle, "/adc0", "i", adc[0]);
-                  tosc_writeNextMessage(&bundle, "/adc1", "i", adc[1]);
-                  tosc_writeNextMessage(&bundle, "/adc2", "i", adc[2]);
-                  tosc_writeNextMessage(&bundle, "/adc3", "i", adc[3]);
-                  tosc_writeNextMessage(&bundle, "/adc4", "i", adc[4]);
-                  tosc_writeNextMessage(&bundle, "/adc5", "i", adc[5]);
+                  tosc_writeNextMessage(&bundle, "/adc0", "f", (float)adc[0] * SCALE_INV);
+                  tosc_writeNextMessage(&bundle, "/adc1", "f", (float)adc[1] * SCALE_INV);
+                  tosc_writeNextMessage(&bundle, "/adc2", "f", (float)adc[2] * SCALE_INV);
+                  tosc_writeNextMessage(&bundle, "/adc3", "f", (float)adc[3] * SCALE_INV);
+                  tosc_writeNextMessage(&bundle, "/adc4", "f", (float)adc[4] * SCALE_INV);
+                  tosc_writeNextMessage(&bundle, "/adc5", "f", (float)adc[5] * SCALE_INV);
                   // ... and send bundle:
                   int len = tosc_getBundleLength(&bundle);
 

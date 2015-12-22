@@ -12,11 +12,11 @@
 
 `sudo ./tedium_osc`
 
-- adc values are sent as bundle: 
+- adc values are sent as an OSC bundle: 
 
 `/adc0 value, /adc1 value, /adc2 value ... `
 
-- buttons and triggers sent as messages, ie:
+- buttons and triggers sent as OSC messages, ie:
 
 `/trigger1 value`
 `/trigger2 value`

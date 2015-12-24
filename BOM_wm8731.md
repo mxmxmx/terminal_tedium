@@ -36,12 +36,12 @@
 
 - 10uF 			 5x (diameter < 5.3mm)
 - 33uF 			 3x (diameter < 8mm) 
-- 
+
 ==============================
 
 ###ICs/semis/etc:###
 
-- WM8731  (TSSOP-28): 		1x  (mouser # 238-WM8731SEDS/V)
+- WM8731  (TSSOP-28): 			1x  (mouser # 238-WM8731SEDS/V)
 - MCP3208 (SOIC16):			1x  (mouser # 579-MCP3208CISL)
 - TL072 (SOIC8):			3x  (††)
 - MCP6002 (SOIC8):			1x (mouser # 579-MCP6002T-I/SN)

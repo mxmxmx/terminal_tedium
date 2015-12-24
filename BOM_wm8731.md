@@ -36,19 +36,16 @@
 
 - 10uF 			 5x (diameter < 5.3mm)
 - 33uF 			 3x (diameter < 8mm) 
-
-### tantalum SMD (1206 (ish), 35V or better):###
-- 10uF-22uF		 1x (e.g. mouser # 74-293D106X0035C2TE3) (‡)
-
+- 
 ==============================
 
 ###ICs/semis/etc:###
 
-- WM8731  (TSSOP-28): 		1x  (mouser # 595-)
+- WM8731  (TSSOP-28): 		1x  (mouser # 238-WM8731SEDS/V)
 - MCP3208 (SOIC16):			1x  (mouser # 579-MCP3208CISL)
 - TL072 (SOIC8):			3x  (††)
-- MCP6002 (SOIC8):			1x
-- MCP6004 (SOIC14):			1x
+- MCP6002 (SOIC8):			1x (mouser # 579-MCP6002T-I/SN)
+- MCP6004 (SOIC14):			1x (mouser # 579-MCP6004T-I/SL)
 - NPN transistors (MMBT3904): 4x
 - SM5817PL-TP Schottky diodes: 3x (or use 1206 ferrit bead, rated 1A)
 - ADP150 regulator (3v3, TSOT): 1x (mouser # 584-ADP150AUJZ-3.3R7)
@@ -83,8 +80,6 @@
 ==============================
 
 ###notes:###
-
-(‡) the tantalum capacitor replaces one of 22uF electrolytics (see build doc), as it sits in the way (duh). NB this is for the 12V bus, so make sure to get a cap with adequate voltage rating! typically, for use with 12V that will mean at least 25V or above (check the datasheet of the capacitor to find out).
 
 (†) i'd use ultrabright 3mm leds, and correspondingly large resistor values (to taste) (V+ = 3.3v); for the illuminated button, 200R works ok (as per BOM)
 

@@ -50,7 +50,7 @@
 - MCP6002 (SOIC8):			1x
 - MCP6004 (SOIC14):			1x
 - NPN transistors (MMBT3904): 4x
-- SM5817 Schottky diodes: 3x (or use 1206 ferrit bead, rated 1A)
+- SM5817PL-TP Schottky diodes: 3x (or use 1206 ferrit bead, rated 1A)
 - ADP150 regulator (3v3, TSOT): 1x (mouser # 584-ADP150AUJZ-3.3R7)
 - LM4040-2v5 (SOT-23) : 1x
 - LM4040-10v (SOT-23) : 1x

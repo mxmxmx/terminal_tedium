@@ -3,13 +3,14 @@
 *   terminal tedium / OSC client (UDP)
 *
 *     
-*   - TD: gate outputs (?); long press; make nicer. etc
-*   - TD: proper timing / get rid of counters
+*   - TD: gate outputs (?); long press; make nicer. etc (pigpio?)
 *   - TD: make more userfriendly, pass IP and port as arguments, etc.
+*
 *
 *   compile with: gcc *.c -Werror -lwiringPi -std=c99 -O2 -g -o tedium_osc 
 */
 
+#define _BSD_SOURCE
 
 #include <stdio.h>
 #include <string.h>
@@ -17,6 +18,7 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <fcntl.h>
+#include <time.h>
 #include <unistd.h>
 
 #include <wiringPi.h>
@@ -26,13 +28,14 @@
 
 const uint16_t BUFLEN = 1024;
 const uint64_t NOW = 1L;
-const uint32_t TIMEOUT = 1000000;  // count up to timeout / ADC is read every .. 
-const uint32_t TIMEOUT_S = 5;      // short time out (for OSC off messages) (buttons)
-const uint32_t TIMEOUT_T = 1000;   // short time out (for OSC off messages) (triggers)
+const uint32_t TIMEOUT = 1000;     // sleep (in us)
+const uint32_t TIMEOUT_S = 100;    // short time out (for OSC off messages) (buttons) // 100 * TIMEOUT us = 0.1s
+const uint32_t TIMEOUT_T = 100;    // short time out (for OSC off messages) (triggers)
 
 #define ADC_SPI_CHANNEL 1
 #define ADC_SPI_SPEED 4000000
 #define ADC_NUM_CHANNELS 6
+#define ADC_NUM ADC_NUM_CHANNELS-1
 #define RESOLUTION 4095
 #define DEADBAND 2
 #define SCALE 4000
@@ -184,23 +187,16 @@ int main(void)
     wiringPiISR (B3, INT_EDGE_FALLING, &Interrupt_B3)  ; 
 
     // flags
-    int _wait = 0, _send = 0, toggle = 0;
+    int _cnt = 0, _send = 0, toggle = 0;
 
     // main action is happening here (..)
      while(1)
     {
-
-    	if (_wait < TIMEOUT) _wait++;
-    	else {
-
-            _wait = 0; // reset counter
-
-            // get adc values
-            for (int i = 0; i < ADC_NUM_CHANNELS; i++) {
-    	         _send += readADC(i, adc);
-            }
+            usleep(TIMEOUT);
+            // get adc value
+            _send += readADC(_cnt, adc);
             // do we need to send an OSC bundle? 
-            if (_send) {
+            if (_cnt == ADC_NUM && _send) {
               
                   // construct OSC bundle:
                   tosc_writeBundle(&bundle, NOW, buf, BUFLEN);
@@ -214,10 +210,11 @@ int main(void)
                   int len = tosc_getBundleLength(&bundle);
 
                   if (sendto(s, buf, len, 0 , (struct sockaddr *) &_serv, slen)==-1) die("sendto()");
-
+                  // reset flag
+                  _send = 0;
             }
-            // reset flag
-            _send = 0;
+            // increment adc cycle counter
+            _cnt = _cnt++ >= ADC_NUM ? 0x0 : _cnt; // 0x5 = ADC_NUM_CHANNELS-1
 
             // handle buttons:
             if (B1_flag) { 
@@ -265,93 +262,80 @@ int main(void)
               int len = tosc_writeMessage(buf, sizeof(buf), "/button2", "F");
               sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
             } 
-      }
 
-      // handle trig inputs:
+            // handle trig inputs:
 
-      if (TR1_flag) { 
+            if (TR1_flag) { 
 
-              TR1_flag =  0;
-              int len = tosc_writeMessage(buf, sizeof(buf), "/trigger1", "T");
-              // send message:
-              if (sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen)) TR1_OFF = 1;
-              _wait_TR1 = 0;
-      }
-
-      if (TR2_flag) { 
-
-              TR2_flag =  0;
-              int len = tosc_writeMessage(buf, sizeof(buf), "/trigger2", "T");
-              // send message:
-              if (sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen)) TR2_OFF = 1;
-              _wait_TR2 = 0;
-      }
-
-      if (TR3_flag) { 
-
-              TR3_flag =  0;
-              int len = tosc_writeMessage(buf, sizeof(buf), "/trigger3", "T");
-              // send message:
-              if (sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen)) TR3_OFF = 1;
-              _wait_TR3 = 0;
-      }
-
-      if (TR4_flag) { 
-
-              TR4_flag =  0;
-              int len = tosc_writeMessage(buf, sizeof(buf), "/trigger4", "T");
-              // send message:
-              if (sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen)) TR4_OFF = 1;
-              _wait_TR4 = 0;
-      }
-
-      // turn off gate1
-      if (TR1_OFF && _wait_TR1 < TIMEOUT_T) _wait_TR1++;
-      else if (TR1_OFF && _wait_TR1 >= TIMEOUT_T) {
-              // reset
-              TR1_OFF = _wait_TR1 = 0;
-              int len = tosc_writeMessage(buf, sizeof(buf), "/trigger1", "F");
-              sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
-      } 
-      // turn off gate2
-      if (TR2_OFF && _wait_TR2 < TIMEOUT_T) _wait_TR2++;
-      else if (TR2_OFF && _wait_TR2 >= TIMEOUT_T) {
-              // reset
-              TR2_OFF = _wait_TR2 = 0;
-              int len = tosc_writeMessage(buf, sizeof(buf), "/trigger2", "F");
-              sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
-      } 
-      // turn off gate3
-      if (TR3_OFF && _wait_TR3 < TIMEOUT_T) _wait_TR3++;
-      else if (TR3_OFF && _wait_TR3 >= TIMEOUT_T) {
-              // reset
-              TR3_OFF = _wait_TR3 = 0;
-              int len = tosc_writeMessage(buf, sizeof(buf), "/trigger3", "F");
-              sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
-      } 
-      // turn off gate4
-      if (TR4_OFF && _wait_TR4 < TIMEOUT_T) _wait_TR4++;
-      else if (TR4_OFF && _wait_TR4 >= TIMEOUT_T) {
-              // reset
-              TR4_OFF = _wait_TR4 = 0;
-              int len = tosc_writeMessage(buf, sizeof(buf), "/trigger4", "F");
-              sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
-      } 
-
-            //printf("len .. %d \n", len);
-            //clear the buffer
-            //memset(buf,'\0', BUFLEN);
-            //try to receive some data, this is a blocking call
-     	   /*
-    	   if (recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &_serve, &slen) == -1)
-            {
-                die("recvfrom()");
+                    TR1_flag =  0;
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger1", "T");
+                    // send message:
+                    if (sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen)) TR1_OFF = 1;
+                    _wait_TR1 = 0;
             }
-            puts(buf);
-    	   */
+
+            if (TR2_flag) { 
+
+                    TR2_flag =  0;
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger2", "T");
+                    // send message:
+                    if (sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen)) TR2_OFF = 1;
+                    _wait_TR2 = 0;
+            }
+
+            if (TR3_flag) { 
+
+                    TR3_flag =  0;
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger3", "T");
+                    // send message:
+                    if (sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen)) TR3_OFF = 1;
+                    _wait_TR3 = 0;
+            }
+
+            if (TR4_flag) { 
+
+                    TR4_flag =  0;
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger4", "T");
+                    // send message:
+                    if (sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen)) TR4_OFF = 1;
+                    _wait_TR4 = 0;
+            }
+
+            // turn off gate1
+            if (TR1_OFF && _wait_TR1 < TIMEOUT_T) _wait_TR1++;
+            else if (TR1_OFF && _wait_TR1 >= TIMEOUT_T) {
+                    // reset
+                    TR1_OFF = _wait_TR1 = 0;
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger1", "F");
+                    sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
+            } 
+            // turn off gate2
+            if (TR2_OFF && _wait_TR2 < TIMEOUT_T) _wait_TR2++;
+            else if (TR2_OFF && _wait_TR2 >= TIMEOUT_T) {
+                    // reset
+                    TR2_OFF = _wait_TR2 = 0;
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger2", "F");
+                    sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
+            } 
+            // turn off gate3
+            if (TR3_OFF && _wait_TR3 < TIMEOUT_T) _wait_TR3++;
+            else if (TR3_OFF && _wait_TR3 >= TIMEOUT_T) {
+                    // reset
+                    TR3_OFF = _wait_TR3 = 0;
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger3", "F");
+                    sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
+            } 
+            // turn off gate4
+            if (TR4_OFF && _wait_TR4 < TIMEOUT_T) _wait_TR4++;
+            else if (TR4_OFF && _wait_TR4 >= TIMEOUT_T) {
+                    // reset
+                    TR4_OFF = _wait_TR4 = 0;
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger4", "F");
+                    sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
+            }
+          
     }
     close(s);
     return 0;
 }
-
 

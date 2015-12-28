@@ -220,23 +220,22 @@ static void terminal_tedium_adc_bang(t_terminal_tedium_adc *spi)
   #endif
 
   int a2dVal[8];
-  int a2dChannel = 0;
+  int a2dChannel = 0, tmp = 0;
   unsigned char data[3];
-  uint8_t input_mode = 1;
   int numChannels = spi->_version ? 0x8 : 0x6 ; // 8 channels for pcm5102a, 6 channels for wm8731 version
+  int SCALE = 4001; // make nice zeros ...
 
   for (a2dChannel = 0; a2dChannel < numChannels; a2dChannel++) {
 
-    data[0]  =  0x04;    //  first byte transmitted -> start bit
-    data[0] |=  input_mode<<1;
-    data[0] |=  (a2dChannel>>2) & 0x01;
+    data[0]  =  0x06 | ((a2dChannel>>2) & 0x01);
     data[1]  =  a2dChannel<<6;
     data[2]  =  0x00;
 
     terminal_tedium_adc_write_read(spi, data, 3);
 
-    // read + invert a2dVal :
-    a2dVal[a2dChannel] = 0xFFF - (((data[1] & 0x0f) << 0x08) | data[2]); 
+    // limit + invert a2dVal :
+    tmp = SCALE - (((data[1] & 0x0f) << 0x08) | data[2]); 
+    a2dVal[a2dChannel] = tmp < 0 ? 0 : tmp;
    
   }
  

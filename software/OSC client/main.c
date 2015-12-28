@@ -198,7 +198,6 @@ void check_buttons(struct buttons* _b, int time_out)
 PI_THREAD (handle_GPIO)
 {
 
-  uint16_t button_states1 = 0, button_cnt1 = 0;
   uint16_t time_out = 125; // wait until longpress
   uint32_t _sleep = TIMEOUT*6;
 

@@ -2,7 +2,7 @@
 
 - note: atm, this works with the wm8731 version only.
 
-- still needs adjusting port # and IP address *manually* (in `int main(void)` / main.c)
+- still needs adjusting port # and IP address *manually* (in `int main(void)`)
 
 - compile with: 
 
@@ -12,11 +12,11 @@
 
 `sudo ./tedium_osc`
 
-- adc values are sent as an OSC bundle (range = 0 (min) - 4000 (max)): 
+- adc values 0-5 are sent as an OSC bundle (range = `0 (min) - 4000 (max)`): 
 
 `/adc0 value, /adc1 value, /adc2 value ... `
 
-- button presses (short, long) and triggers are sent as individual OSC messages (`T` or `F`), ie:
+- button presses (short, long) and triggers are sent as individual OSC messages (`T` or `F`), namely:
 
 `/trigger1 value`
 `/trigger2 value`

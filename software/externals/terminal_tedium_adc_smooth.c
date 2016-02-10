@@ -250,7 +250,8 @@ static void terminal_tedium_adc_bang(t_terminal_tedium_adc *spi)
         int tmp2 = spi->a2d[a2dChannel];
         if ( (tmp2 - tmp) > DEADBAND || (tmp - tmp2) > DEADBAND )  
           a2dVal[a2dChannel] = tmp < 0 ? 0 : tmp;
-        else a2dVal[a2dChannel] = tmp2;
+        else 
+          a2dVal[a2dChannel] = tmp2;
         spi->a2d[a2dChannel] = a2dVal[a2dChannel];
   }
  

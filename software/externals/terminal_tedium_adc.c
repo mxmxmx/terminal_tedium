@@ -29,7 +29,6 @@
     #include <linux/spi/spidev.h>
 #endif
 
-
 static t_class *terminal_tedium_adc_class;
 
 typedef struct _terminal_tedium_adc
@@ -47,8 +46,12 @@ typedef struct _terminal_tedium_adc
     unsigned char mode;
     unsigned char bitsPerWord;
     unsigned int speed;
+    unsigned int smooth;
+    unsigned int smooth_shift;
+    unsigned int deadband;
     int spifd;
     int _version;
+    int a2d[8];
 } t_terminal_tedium_adc;
 
 static t_terminal_tedium_adc *terminal_tedium_adc_new(t_floatarg version);
@@ -156,6 +159,55 @@ static int terminal_tedium_adc_close(t_terminal_tedium_adc *spi){
     return(statusVal);
 }
 
+/***********************************************************
+ * terminal_tedium_adc_smooth(): set smoothing
+ * *********************************************************/
+ 
+void terminal_tedium_adc_smooth(t_terminal_tedium_adc *spi, t_floatarg _smooth){
+
+    unsigned int _shift, s = _smooth;
+
+    if (s < 2) {
+      s = 1;
+      _shift = 0;
+    }
+    else if (s < 4) {
+      s = 2;
+      _shift = 1;
+    }
+    else if (s < 8) {
+      s = 4;
+     _shift = 2;
+    }
+    else if (s < 16) {
+      s = 8;
+      _shift = 3;
+    }
+    else {
+      s = 16;  
+      _shift = 4; 
+    }
+   
+    spi->smooth = s;
+    spi->smooth_shift = _shift;
+}
+
+/***********************************************************
+ * terminal_tedium_adc_deadband(): set deadband
+ * *********************************************************/
+ 
+void terminal_tedium_adc_deadband(t_terminal_tedium_adc *spi, t_floatarg _deadband){
+
+    int d = (int)_deadband;
+
+    if (d < 0)
+      d = 0;
+    else if (d > 5)
+      d = 5; 
+   
+    spi->deadband = d;
+}
+
 /********************************************************************
  * This function frees the object (destructor).
  * ******************************************************************/
@@ -219,24 +271,49 @@ static void terminal_tedium_adc_bang(t_terminal_tedium_adc *spi)
       return;
   #endif
 
-  int a2dVal[8];
-  int a2dChannel = 0, tmp = 0;
+  int a2dVal[8] = {0,0,0,0,0,0,0,0};
+  int a2dChannel = 0;
   unsigned char data[3];
   int numChannels = spi->_version ? 0x8 : 0x6 ; // 8 channels for pcm5102a, 6 channels for wm8731 version
   int SCALE = 4001; // make nice zeros ...
 
+  unsigned int SMOOTH = spi->smooth;
+  unsigned int SMOOTH_SHIFT = spi->smooth_shift;
+  int DEADBAND = spi->deadband;
+
+  
+  for (int i = 0; i < SMOOTH; i++) {
+
+      for (a2dChannel = 0; a2dChannel < numChannels; a2dChannel++) {
+
+        data[0]  =  0x06 | ((a2dChannel>>2) & 0x01);
+        data[1]  =  a2dChannel<<6;
+        data[2]  =  0x00;
+
+        terminal_tedium_adc_write_read(spi, data, 3);
+
+        a2dVal[a2dChannel] += (((data[1] & 0x0f) << 0x08) | data[2]); 
+      }
+  }
+
   for (a2dChannel = 0; a2dChannel < numChannels; a2dChannel++) {
 
-    data[0]  =  0x06 | ((a2dChannel>>2) & 0x01);
-    data[1]  =  a2dChannel<<6;
-    data[2]  =  0x00;
+      if (DEADBAND) {
 
-    terminal_tedium_adc_write_read(spi, data, 3);
+        int tmp  = SCALE - (a2dVal[a2dChannel] >> SMOOTH_SHIFT);
+        int tmp2 = spi->a2d[a2dChannel];
 
-    // limit + invert a2dVal :
-    tmp = SCALE - (((data[1] & 0x0f) << 0x08) | data[2]); 
-    a2dVal[a2dChannel] = tmp < 0 ? 0 : tmp;
-   
+        if ((tmp2 - tmp) > DEADBAND || (tmp - tmp2) > DEADBAND)  
+          a2dVal[a2dChannel] = tmp < 0 ? 0 : tmp;
+        else 
+          a2dVal[a2dChannel] = tmp2;
+        spi->a2d[a2dChannel] = a2dVal[a2dChannel];
+      }
+      else {
+
+        int tmp = SCALE - (a2dVal[a2dChannel] >> SMOOTH_SHIFT);
+        a2dVal[a2dChannel] = tmp < 0 ? 0 : tmp;
+      }
   }
  
   if (numChannels < 0x7) {  // wm8731 :
@@ -283,8 +360,10 @@ static t_terminal_tedium_adc *terminal_tedium_adc_new(t_floatarg version){
     spi->bitsPerWord = 8;
     spi->speed = 4000000;
     spi->spifd = -1;
-    spi->_version = version; // 
- 
+    spi->_version = version;
+    spi->smooth = 1; 
+    spi->smooth_shift = 0;
+    spi->deadband = 0;
     return(spi);
 }
 
@@ -297,5 +376,9 @@ void terminal_tedium_adc_setup(void)
         A_DEFSYM, 0);
     class_addmethod(terminal_tedium_adc_class, (t_method)terminal_tedium_adc_close, gensym("close"), 
         0, 0);
+    class_addmethod(terminal_tedium_adc_class, (t_method)terminal_tedium_adc_smooth, gensym("smooth"), 
+        A_DEFFLOAT, 0);
+    class_addmethod(terminal_tedium_adc_class, (t_method)terminal_tedium_adc_deadband, gensym("deadband"), 
+        A_DEFFLOAT, 0);
     class_addbang(terminal_tedium_adc_class, terminal_tedium_adc_bang);
 }

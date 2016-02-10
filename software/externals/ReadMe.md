@@ -24,7 +24,7 @@ pcm5102a version (8 channels):
 [ADC0]  [ADC1]  ... 	[ADC7]
 ```
 
-message "open" opens the device. reads ADC when banged. (NB: plain `[open(` is for use with the wm8731 version (in which case, we only need to read 6 ADC channels. use `[open adc(` for use with the pcm5102a version, in which case all 8 channels need to be read.)
+message "open" opens the device. reads ADC when banged. (NB: plain `[open(` is for use with the wm8731 version (in which case, we only need to read 6 ADC channels. use `[open adc(` for use with the pcm5102a version, in which case all 8 channels need to be read.). there's two additional methods, `[smooth(` and `[deadband(`. if the ADC is jittery, you can use it to smooth over some of that. e.g. use `[smooth 8(` would average 8 x (available values are 1x, 2x, 4x, 8x, 16x); `[deadband(` takes values from 0-5.
 
  
 **gate outputs:**

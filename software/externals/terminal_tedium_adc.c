@@ -163,32 +163,32 @@ static int terminal_tedium_adc_close(t_terminal_tedium_adc *spi){
  * terminal_tedium_adc_smooth(): set smoothing
  * *********************************************************/
  
-void terminal_tedium_adc_smooth(t_terminal_tedium_adc *spi, t_floatarg _smooth){
+void terminal_tedium_adc_smooth(t_terminal_tedium_adc *spi, t_floatarg s){
 
-    unsigned int _shift, s = _smooth;
+    unsigned int _shift, _smooth = s;
 
-    if (s < 2) {
-      s = 1;
-      _shift = 0;
+    if (_smooth < 2) {
+      _smooth = 1;
+      _shift  = 0;
     }
-    else if (s < 4) {
-      s = 2;
-      _shift = 1;
+    else if (_smooth < 4) {
+      _smooth = 2;
+      _shift  = 1;
     }
-    else if (s < 8) {
-      s = 4;
-     _shift = 2;
+    else if (_smooth < 8) {
+      _smooth = 4;
+      _shift  = 2;
     }
-    else if (s < 16) {
-      s = 8;
-      _shift = 3;
+    else if (_smooth < 16) {
+      _smooth = 8;
+      _shift  = 3;
     }
     else {
-      s = 16;  
-      _shift = 4; 
+      _smooth = 16;  
+      _shift  = 4; 
     }
    
-    spi->smooth = s;
+    spi->smooth = _smooth;
     spi->smooth_shift = _shift;
 }
 
@@ -196,16 +196,16 @@ void terminal_tedium_adc_smooth(t_terminal_tedium_adc *spi, t_floatarg _smooth){
  * terminal_tedium_adc_deadband(): set deadband
  * *********************************************************/
  
-void terminal_tedium_adc_deadband(t_terminal_tedium_adc *spi, t_floatarg _deadband){
+void terminal_tedium_adc_deadband(t_terminal_tedium_adc *spi, t_floatarg d){
 
-    int d = (int)_deadband;
+    int _deadband = (int)d;
 
-    if (d < 0)
-      d = 0;
-    else if (d > 5)
-      d = 5; 
+    if (_deadband < 0)
+      _deadband = 0;
+    else if (_deadband > 5)
+      _deadband = 5; 
    
-    spi->deadband = d;
+    spi->deadband = _deadband;
 }
 
 /********************************************************************

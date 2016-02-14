@@ -23,8 +23,7 @@
 ###caps 0603 (16v or better):###
 
 - 18-20p			6x (NP0/C0G) 
-- 1n 				6x (NP0/C0G)  	 
-- 10n 				1x 
+- 10n 				7x (NP0/C0G)  	 
 - 100n 				14x 
 - 470n 				3x
 - 1uF 				2x (may be 0805)

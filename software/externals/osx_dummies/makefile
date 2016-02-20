@@ -1,8 +1,8 @@
 # CC=/usr/bin/gcc
 #
-# this a/the makefile which would be used to compile the dummy externals for OSX (or linux)
+# this is a/the makefile which would be used to compile the dummy externals for OSX (or linux)
 #
-# edit L#10 to point it to the external (without suffix); e.g. terminal_tedium_adc (or see below)
+# edit L#11 to point it to the external (without suffix); e.g. terminal_tedium_adc (or see below)
 #
 # then compile with:
 # make darwin

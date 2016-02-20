@@ -29,6 +29,7 @@
 any parameter for use with the wm8731 version (= 6 ADC channels) -
 use "open adc" for use with pcm5102a version (= 8 ADC channels);
 #X obj 646 181 terminal_tedium_adc;
+#X msg 377 110 smooth 3;
 #X connect 6 0 7 0;
 #X connect 7 0 8 0;
 #X connect 7 0 23 0;
@@ -54,3 +55,4 @@ use "open adc" for use with pcm5102a version (= 8 ADC channels);
 #X connect 27 5 5 0;
 #X connect 27 6 17 0;
 #X connect 27 7 18 0;
+#X connect 28 0 27 0;

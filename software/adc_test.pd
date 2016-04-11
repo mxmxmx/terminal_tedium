@@ -1,35 +1,42 @@
-#N canvas 351 23 1185 562 10;
+#N canvas 95 23 1270 562 10;
 #X obj 505 285 s adc0;
 #X obj 566 285 s adc1;
 #X obj 628 285 s adc2;
 #X obj 692 285 s adc3;
 #X obj 752 285 s adc4;
 #X obj 816 285 s adc5;
-#X obj 108 146 loadbang;
-#X obj 108 172 delay 300;
-#X msg 108 198 \; pd dsp 1 \;;
-#X obj 57 385 r adc0;
-#X obj 113 385 r adc1;
-#X obj 170 385 r adc2;
-#X obj 228 385 r adc3;
-#X obj 285 385 r adc4;
-#X obj 342 385 r adc5;
-#X obj 56 462 pack f f f f f f f f;
-#X obj 56 488 print adc:;
+#X obj 66 169 loadbang;
+#X obj 66 195 delay 300;
+#X msg 66 221 \; pd dsp 1 \;;
+#X obj 69 308 r adc0;
+#X obj 125 308 r adc1;
+#X obj 182 308 r adc2;
+#X obj 240 308 r adc3;
+#X obj 297 308 r adc4;
+#X obj 354 308 r adc5;
+#X obj 68 385 pack f f f f f f f f;
+#X obj 68 411 print adc:;
 #X obj 881 285 s adc6;
 #X obj 941 285 s adc7;
-#X obj 342 414 r adc6;
-#X obj 342 443 r adc7;
+#X obj 354 337 r adc6;
+#X obj 354 366 r adc7;
 #X msg 524 120 open;
 #X obj 646 69 r initbang;
-#X obj 223 173 s initbang;
-#X msg 757 117 open adc;
-#X obj 646 118 metro 10;
-#X text 868 115 the "open" message opens the device. - don't supply
-any parameter for use with the wm8731 version (= 6 ADC channels) -
-use "open adc" for use with pcm5102a version (= 8 ADC channels);
+#X obj 187 212 s initbang;
+#X msg 757 134 open adc;
+#X obj 646 138 metro 10;
 #X obj 646 181 terminal_tedium_adc;
-#X msg 377 110 smooth 3;
+#X msg 403 166 smooth 4;
+#X msg 402 121 deadband 2;
+#X text 862 48 the "open" message opens the device. - don't supply
+any parameter for use with the wm8731 version (= 6 ADC channels) -
+use "open adc" for use with pcm5102a version (= 8 ADC channels). the
+metro object determines the update rate (in ms).;
+#X text 863 127 the "smooth" message adds (optional) averaging (not
+connected in this example): 1 \, 2 \, 4 \, 8 \, and 16 are the options
+(defaults to 1 \, ie no averaging) the "deadband" message can be used
+to add some hysteresis (ditto: not connected here): 0 \, 1 \, 2 \,
+3 \, 4 \, and 5 are legal values (default is 0).;
 #X connect 6 0 7 0;
 #X connect 7 0 8 0;
 #X connect 7 0 23 0;
@@ -42,17 +49,18 @@ use "open adc" for use with pcm5102a version (= 8 ADC channels);
 #X connect 15 0 16 0;
 #X connect 19 0 15 6;
 #X connect 20 0 15 7;
-#X connect 21 0 27 0;
+#X connect 21 0 26 0;
 #X connect 22 0 21 0;
 #X connect 22 0 24 0;
 #X connect 22 0 25 0;
-#X connect 25 0 27 0;
-#X connect 27 0 0 0;
-#X connect 27 1 1 0;
-#X connect 27 2 2 0;
-#X connect 27 3 3 0;
-#X connect 27 4 4 0;
-#X connect 27 5 5 0;
-#X connect 27 6 17 0;
-#X connect 27 7 18 0;
-#X connect 28 0 27 0;
+#X connect 25 0 26 0;
+#X connect 26 0 0 0;
+#X connect 26 1 1 0;
+#X connect 26 2 2 0;
+#X connect 26 3 3 0;
+#X connect 26 4 4 0;
+#X connect 26 5 5 0;
+#X connect 26 6 17 0;
+#X connect 26 7 18 0;
+#X connect 27 0 26 0;
+#X connect 28 0 26 0;

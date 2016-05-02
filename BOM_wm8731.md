@@ -73,13 +73,13 @@
 | what | # | note |
 | --- | ---: | --- |
 | jacks | 16x | thonkiconn/kobiconn |
-| pots | 6x | 9mm vertical, 10kB |
+| potentiometers | 6x | 9mm vertical, 10k**B** |
 | tact switches | 2x | multimecs 5E/5G series; mouser # 642-5GTH935 |
 | illum. tact switch | 1x | ditto; e.g. mouser # 642-5GTH93542 (= YELLOW) |
 | caps, black | 2x | mouser # 642-1SS09-15.0, or 642-1SS09-16.0 |
 | caps, transparent | 1x | mouser # 642-1IS11-15.0, or 642-1IS11-16.0 |
 | 2-pin header, male | 1x | RM2.54 (+ little jumper plastic thingie to match (= the 5V power jumper)|
-| raspberry GPIO socket, 2x20, RM2.54 | 1x | extra-tall female socket for RPI (†) |
+| raspberry GPIO socket, 2x20 | 1x | RM2.54, extra-tall female socket for RPI (†) |
 | spacer/standoff (M3) | 2x | to match height of the 2x20 socket/header (c. 20mm for pi B+, pi 2, pi 3) |
 
 - (†) or four of [these](http://www.taydaelectronics.com/connectors-sockets/stackable-headers/stackable-header-10-pins-2-54mm.html), for example, will do; if planning to use model A+ or zero, the socket doesn't have to be as tall. 

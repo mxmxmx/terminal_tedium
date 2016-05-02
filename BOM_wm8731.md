@@ -66,7 +66,7 @@
 ###misc:###
 
 - jacks:			  16x (thonkiconn/kobiconn)
-- pots:				  6x  (9mm vertical; linear (50k-100k will do))
+- pots:				  6x  (9mm vertical / linear / 10kB)
 - tact switches: 	  2x  (multimecs 5E/5G series) (mouser # 642-5GTH935)
 - illum. tact switch: 1x  (multimecs 5E/5G series) (e.g. mouser # 642-5GTH93542 (= YELLOW)) (†††††)
 - caps:

@@ -1,5 +1,4 @@
 #BOM for terminal tedium IO 
-#BOM for terminal tedium IO 
 
 ###resistors 0603:
 

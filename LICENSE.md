@@ -1,5 +1,7 @@
 
-#This hardware is shared under the Creative Commons CC BY-NC-SA (4.0) license:
+Copyright (c) mxmxmx 2013-2015
+
+###Hardware shared under the Creative Commons CC BY-NC-SA (4.0) license:
 
 
 >You are free to:

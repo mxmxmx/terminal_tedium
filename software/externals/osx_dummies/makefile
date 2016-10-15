@@ -19,7 +19,7 @@ linux: $(NAME).pd_linux
 .SUFFIXES: .pd_linux
 .c.pd_linux:
 	gcc $(CFLAGS) -o $*.o -c $*.c
-	ld -export_dynamics -shared -o $*.pd_linux $*.o
+	ld --export_dynamic -shared -o $*.pd_linux $*.o
 	strip --strip-unneeded $*.pd_linux
 
 darwin: $(NAME).pd_darwin

@@ -282,7 +282,7 @@ static void terminal_tedium_adc_bang(t_terminal_tedium_adc *spi)
   int DEADBAND = spi->deadband;
 
   
-  for (int i = 0; i < SMOOTH; i++) {
+  for (unsigned int i = 0; i < SMOOTH; i++) {
 
       for (a2dChannel = 0; a2dChannel < numChannels; a2dChannel++) {
 

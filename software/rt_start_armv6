@@ -1,0 +1,29 @@
+#!/bin/bash 
+
+## Stop the ntp service
+sudo service ntp stop
+
+## Stop the triggerhappy service
+sudo service triggerhappy stop
+
+## Stop the dbus service. Warning: this can cause unpredictable behaviour when running a desktop environment on the RPi
+sudo service dbus stop
+
+## Remount /dev/shm to prevent memory allocation errors
+sudo mount -o remount,size=128M /dev/shm
+
+## set CPU scaling governor to performance (zero et al.)
+echo -n performance | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+# master volume
+amixer cset numid=1 110
+# capture volume
+amixer cset numid=3 31
+# line capture switch
+amixer cset numid=4 on
+#  HiFi playback switch
+amixer cset numid=13 on
+# save
+alsactl store
+
+exit

@@ -36,6 +36,7 @@ echo ""
 
 echo "installing wiringPi ... -------------------------------------------------------"
 echo ""
+cd /home/pi
 sudo apt-get --assume-yes purge wiringpi >/dev/null 2>&1
 git clone git://git.drogon.net/wiringPi
 cd wiringPi 

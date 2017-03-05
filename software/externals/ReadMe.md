@@ -53,7 +53,7 @@ where GPIO_num = 4, 17, 2, 3, 23, 24, or 25. outputs bang.
 
 **compile with:**
 
-`gcc -O3 -Wall -c [name_of_external].c -o [name_of_external].o`
+`gcc -std=c99 -O3 -Wall -c [name_of_external].c -o [name_of_external].o`
 
 `ld --export-dynamic -shared -o [name_of_external].pd_linux [name_of_external].o -lc -lm -lwiringPi`
 

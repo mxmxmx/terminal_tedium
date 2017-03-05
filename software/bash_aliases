@@ -1,0 +1,5 @@
+## pd aliases
+
+alias sudo='sudo '
+alias puredata='/home/pi/pd-0.47-1/bin/pd'
+alias pd='/home/pi/pd-0.47-1/bin/pd'

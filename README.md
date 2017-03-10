@@ -23,8 +23,7 @@ build info, see here: https://github.com/mxmxmx/terminal_tedium/wiki
 
 ### wm8731 (blue) / pcm5102a (pink) : 
 
-![My image](https://c1.staticflickr.com/1/574/22746127472_95676d8e11_b.jpg)
-
+<img src="https://c1.staticflickr.com/1/574/22746127472_95676d8e11_b.jpg" width="70%">.
 
 
 see [muffwiggler.com](http://www.muffwiggler.com/forum/viewtopic.php?t=104896&postdays=0&postorder=asc&start=0) for more details.

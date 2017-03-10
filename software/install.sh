@@ -3,10 +3,12 @@
 echo ""
 echo ""
 echo ""
-echo " .... installing things for terminal tedium ---------------------------------"
+echo ">>>>> terminal tedium <<<<<< --------------------------------------------------"
 echo ""
-echo "(this will take a while)"
+echo "(sit back, this will take a 2-3 minutes)"
 echo ""
+
+PD_VERSION="pd-0.47-1"
 
 HARDWARE_VERSION=$(uname -m)
 
@@ -19,7 +21,7 @@ else
 	exit -1
 fi
 echo ""
-echo "installing git ................. ---------------------------------------------"
+echo "installing git ... ------------------------------------------------------------"
 echo ""
 sudo apt-get --assume-yes install git-core
 echo ""
@@ -47,12 +49,12 @@ rm -r -f /home/pi/wiringPi
 echo ""
 echo ""
 
-echo "installing pd ... -------------------------------------------------------------"
+echo "installing pd ($PD_VERSION)... -------------------------------------------------"
 echo ""
 cd /home/pi
-wget http://msp.ucsd.edu/Software/pd-0.47-1.armv7.tar.gz
-tar -xvzf pd-0.47-1.armv7.tar.gz >/dev/null
-rm pd-0.47-1.armv7.tar.gz
+wget http://msp.ucsd.edu/Software/$PD_VERSION.armv7.tar.gz
+tar -xvzf $PD_VERSION.armv7.tar.gz >/dev/null
+rm $PD_VERSION.armv7.tar.gz
 
 echo ""
 
@@ -63,17 +65,17 @@ cd /home/pi/terminal_tedium/software/externals/
 echo " > terminal_tedium_adc"
 gcc -std=c99 -O3 -Wall -c terminal_tedium_adc.c -o terminal_tedium_adc.o
 ld --export-dynamic -shared -o terminal_tedium_adc.pd_linux terminal_tedium_adc.o  -lc -lm -lwiringPi
-sudo mv terminal_tedium_adc.pd_linux /home/pi/pd-0.47-1/extra/
+sudo mv terminal_tedium_adc.pd_linux /home/pi/$PD_VERSION/extra/
 
 echo " > tedium_input"
 gcc -std=c99 -O3 -Wall -c tedium_input.c -o tedium_input.o
 ld --export-dynamic -shared -o tedium_input.pd_linux tedium_input.o  -lc -lm -lwiringPi
-sudo mv tedium_input.pd_linux /home/pi/pd-0.47-1/extra/
+sudo mv tedium_input.pd_linux /home/pi/$PD_VERSION/extra/
 
 echo " > tedium_output"
 gcc -std=c99 -O3 -Wall -c tedium_output.c -o tedium_output.o
 ld --export-dynamic -shared -o tedium_output.pd_linux tedium_output.o  -lc -lm -lwiringPi
-sudo mv tedium_output.pd_linux /home/pi/pd-0.47-1/extra/
+sudo mv tedium_output.pd_linux /home/pi/$PD_VERSION/extra/
 
 rm terminal_tedium_adc.o
 rm tedium_input.o
@@ -83,7 +85,14 @@ echo ""
 
 # create aliases
 
-sudo cp /home/pi/terminal_tedium/software/bash_aliases ~/.bash_aliases
+cd /home/pi/
+
+rm -f .bash_aliases >/dev/null
+echo -n > .bash_aliases
+
+echo "alias sudo='sudo '" >> .bash_aliases
+echo "alias puredata='/home/pi/$PD_VERSION/bin/pd'" >> .bash_aliases
+echo "alias pd='/home/pi/$PD_VERSION/bin/pd'" >> .bash_aliases
 
 echo "done installing pd ... ---------------------------------------------------------"
 
@@ -106,14 +115,14 @@ sudo chmod +x /home/pi/terminal_tedium/software/rt_start
 echo ""
 echo ""
 
-echo "boot/config ... ----------------------------------------------------------------"
+echo "boot/config ... -----------------------------------------------------------------"
 
 sudo cp /home/pi/terminal_tedium/software/config.txt /boot/config.txt 
 
 echo ""
 echo ""
 
-echo "alsa ... -----------------------------------------------------------------------"
+echo "alsa ... ------------------------------------------------------------------------"
 
 sudo cp /home/pi/terminal_tedium/software/asound.conf /etc/asound.conf
 
@@ -125,6 +134,21 @@ sudo apt-get --assume-yes install alsa-utils
 echo ""
 echo ""
 
-echo "done ... reboot ----------------------------------------------------------------"
-sudo reboot
+echo "done ... clean up + reboot -------------------------------------------------------"
 
+# remove hardware files and other stuff that's not needed
+rm -r -f home/pi/terminal_tedium/hardware/
+cd /home/pi/terminal_tedium/software/
+rm -r externals/
+rm asound.conf
+rm pdpd
+rm pullup.py
+rm rc.local
+rm rt_start_armv*
+rm config.txt
+rm install.sh
+cd /home/pi/terminal_tedium/
+rm *.md
+
+sudo reboot
+echo ""

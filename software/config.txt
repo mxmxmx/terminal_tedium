@@ -40,7 +40,7 @@
 #sdtv_mode=2
 
 #uncomment to overclock the arm. 700 MHz is the default.
-arm_freq=1000
+#arm_freq=1000
 
 # Uncomment some or all of these to enable the optional hardware interfaces
 #dtparam=i2c_arm=on

@@ -1,6 +1,6 @@
-#BOM for terminal tedium IO 
+# BOM for terminal tedium IO 
 
-###resistors 0603:
+### resistors 0603:
 
 | value | # | note |
 | --- | ---: | --- |
@@ -21,7 +21,7 @@
 
 - (†) best to use **ultrabright** LEDs, and correspondingly large resistor values (to taste) (V+ = 3.3v); for the illuminated tact switch, 200R works ok (as per BOM)
 
-###caps 0603 (25v or better):
+### caps 0603 (25v or better):
 
 | value | # | note |
 | --- | ---: | --- |
@@ -32,14 +32,14 @@
 | 1uF  | 2x | MLCC (may be 0805) |
 | 10uF | 2x | MLCC (may be 0805) |
 
-###electrolytic caps, SMD:
+### electrolytic caps, SMD:
 
 | value | # | note |
 | --- | ---: | --- |
 | 10uF | 5x | 16V or better; diameter < 5.3mm; e.g. mouser # 647-UUQ1E100MCL1GB |
 | 33uF | 3x | 25V or better; diameter < 8mm |
 
-###ICs/semis/etc:
+### ICs/semis/etc:
 
 | what | # | package | note |
 | --- | ---: | --- | --- |
@@ -56,7 +56,7 @@
 
 - (†) two of the TL072s are in the audio path — if you’d like, use something better for the output stage.
 
-###through-hole parts:
+### through-hole parts:
 
 | what | # | package | note |
 | --- | ---: | --- | --- |
@@ -68,7 +68,7 @@
 
 - (†) the 500 ma version should do for models a+, b+; pi 2 needs 1.0, it looks like; as a cheaper/less efficient solution, use a 7805. if planning to power the raspberry via usb (= 5v disconnected! or no 5V regulator soldered), no such $ regulator is needed, of course.
 
-###misc:
+### misc:
 
 | what | # | note |
 | --- | ---: | --- |

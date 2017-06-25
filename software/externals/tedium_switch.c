@@ -1,3 +1,9 @@
+/*
+ *  left outlet: print time
+ *  right outlet: print 1 when pushed, 0 when released
+ *
+ */
+
 #include "m_pd.h"
 #include <stdio.h>
 #ifdef __arm__
@@ -32,26 +38,15 @@ void tedium_switch_tick(t_tedium_switch *x)
 	}
 	// released ? 
 	if (!prevState && x->clkState) {
+		outlet_float(x->x_out1, x->ticks);
 		outlet_float(x->x_out2, 0x0);
-	}
-
-	if (x->ticks > 1000 && x->clkState) {
-	// long press:
-		outlet_float(x->x_out1, 0x2);
-		x->ticks = 0x0;
 		x->switchState = 0x0;
-	}
-	else if (x->switchState == 0x1 && x->clkState) {
-	// short press:
-		outlet_float(x->x_out1, 0x1);
 		x->ticks = 0x0;
-		x->switchState = 0x0;
 	}
-
 	// delay 1 msec
 	clock_delay(x->x_clock, 0x1);
 	// if button is held, count++
-	if (!x->clkState && x->switchState == 0x1) {
+	if (x->switchState == 0x1) {
 		x->ticks++;
 	}
 }
@@ -64,7 +59,7 @@ void *tedium_switch_new(t_floatarg _pin)
 	if (_pin == 23 || _pin == 24 || _pin == 25) x->pinNum = _pin;
 	else x->pinNum = 23; // default to pin #23
 	// init 
-	x->clkState = 0;
+	x->clkState = 1;
 	x->switchState = 0;
 	x->ticks = 0;
 	#ifdef __arm__

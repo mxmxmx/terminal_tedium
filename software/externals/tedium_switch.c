@@ -36,7 +36,7 @@ void tedium_switch_tick(t_tedium_switch *x)
 	}
 
 	if (x->ticks > 1000 && x->clkState) {
-    // long press:
+	// long press:
 		outlet_float(x->x_out1, 0x2);
 		x->ticks = 0x0;
 		x->switchState = 0x0;

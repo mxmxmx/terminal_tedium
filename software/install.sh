@@ -155,6 +155,8 @@ rm install.sh
 cd /home/pi/terminal_tedium/
 rm -rf hardware
 rm *.md
+cd /home/pi/
+rm install.sh
 
 sudo reboot
 echo ""

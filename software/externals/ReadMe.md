@@ -4,25 +4,13 @@ externals for mcp3208 + GPIO / terminal tedium
 
 ## ADC:
 
-wm8731 version (6 channels): 
+#### wm8731 version (6 channels): 
 
-```
-[open(
-|
-[terminal_tedium_adc]
-|  |  |  |  |  |  |  | 
-[ADC0]  [ADC1]  ... 	[ADC5]
-```
+<img src="https://c1.staticflickr.com/5/4286/35410513881_a86238a7f9_o.png" width="50%">
 
-pcm5102a version (8 channels): 
+#### pcm5102a version (8 channels): 
 
-```
-[open adc(
-|
-[terminal_tedium_adc]
-|  |  |  |  |  |  |  | 
-[ADC0]  [ADC1]  ... 	[ADC7]
-```
+<img src="https://c1.staticflickr.com/5/4232/35410513941_bdf67d3bc3_b.jpg" width="50%">
 
 message "open" opens the device. reads ADC when banged. (NB: plain `[open(` is for use with the wm8731 version (in which case, we only need to read 6 ADC channels. use `[open adc(` for use with the pcm5102a version, in which case all 8 channels need to be read.). the object has two additional methods, `[smooth(` and `[deadband(`. if the ADC is jittery, you can use those to smooth over some of that. for instance, `[smooth 4(` will average over four input samples,  `[smooth 8(` over eight, etc (available values are 1x, 2x, 4x, 8x, 16x); `[deadband(` takes values from 0-5. default is: `smooth` = 1x, `deadband` = 0. 
 

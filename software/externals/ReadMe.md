@@ -52,10 +52,12 @@ where GPIO_num = 4, 17, 2, 3, 23, 24, or 25. outputs bang.
 
 ```
 [tedium_switch <GPIO_num>] 
-|						 |
-o                        o
+|						|
+o 						o
 ```
-where GPIO_num = 23, 24, or 25. left outlet: time switch is held down (in milliseconds); right outlet: push = < 1 > / release = < 0 >.
+where GPIO_num = 23, 24, or 25. 
+left outlet: time switch is held down (in milliseconds).
+right outlet: push = < 1 > / release = < 0 >.
 
 ====================================================================================
 

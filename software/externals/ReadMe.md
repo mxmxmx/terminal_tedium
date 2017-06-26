@@ -3,12 +3,12 @@ externals for mcp3208 + GPIO / terminal tedium
 
 
 ## ADC: terminal_tedium_adc
-
-- wm8731 version (6 channels): 
+- wm8731 version (6 channels):
 <img src="https://c1.staticflickr.com/5/4286/35410513881_a86238a7f9_o.png" width="50%">
-- pcm5102a version (8 channels): 
+- pcm5102a version (8 channels):
 <img src="https://c1.staticflickr.com/5/4232/35410513941_bdf67d3bc3_b.jpg" width="50%">
-message "open" opens the device. reads ADC when banged. 
+
+- message < open > opens the SPI device. reads ADC when banged. 
 
 - NB: plain `[open(` is for use with the wm8731 version (in which case, we only need to read 6 ADC channels. use `[open adc(` for use with the pcm5102a version, in which case all 8 channels need to be read.). 
 

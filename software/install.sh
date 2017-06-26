@@ -77,9 +77,15 @@ gcc -std=c99 -O3 -Wall -c tedium_output.c -o tedium_output.o
 ld --export-dynamic -shared -o tedium_output.pd_linux tedium_output.o  -lc -lm -lwiringPi
 sudo mv tedium_output.pd_linux /home/pi/$PD_VERSION/extra/
 
+echo " > tedium_switch"
+gcc -std=c99 -O3 -Wall -c tedium_switch.c -o tedium_switch.o
+ld --export-dynamic -shared -o tedium_switch.pd_linux tedium_switch.o  -lc -lm -lwiringPi
+sudo mv tedium_switch.pd_linux /home/pi/$PD_VERSION/extra/
+
 rm terminal_tedium_adc.o
 rm tedium_input.o
 rm tedium_output.o
+rm tedium_switch.o
 
 echo ""
 

@@ -9,9 +9,7 @@ externals for mcp3208 + GPIO / terminal tedium
 - message < open > opens the SPI device. reads ADC when banged. 
 
 - **NB:** plain `[open(` is for use with the wm8731 version (in which case, we only need to read 6 ADC channels). use `[open adc(` for use with the pcm5102a version (in which case all 8 channels need to be read):
-
 <img src="https://c1.staticflickr.com/5/4232/35410513941_bdf67d3bc3_b.jpg" width="50%">
-
 - the ADC object has **two additional methods**, `[smooth(` and `[deadband(`. if the ADC is jittery, you can use those to smooth over some of that. for instance, `[smooth 4(` will average over four input samples,  `[smooth 8(` over eight, etc (available values are 1x, 2x, 4x, 8x, 16x); `[deadband(` takes values from 0-5. default is: `smooth` = 1x, `deadband` = 0. 
 
  

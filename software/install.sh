@@ -57,6 +57,7 @@ if [[ "$HARDWARE_VERSION" == 'armv6l' ]]; then
 	wget http://msp.ucsd.edu/Software/$PD_VERSION-armv6.rpi.tar.gz
 	tar -xvzf $PD_VERSION-armv6.rpi.tar.gz >/dev/null
 	rm $PD_VERSION-armv6.rpi.tar.gz
+	mv $PD_VERSION-armv6 $PD_VERSION
 else
 	wget http://msp.ucsd.edu/Software/$PD_VERSION.rpi.tar.gz
 	tar -xvzf $PD_VERSION.rpi.tar.gz >/dev/null
@@ -169,5 +170,5 @@ rm *.md
 cd /home/pi/
 rm install.sh
 
-sudo reboot
+# sudo reboot
 echo ""

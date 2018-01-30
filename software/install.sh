@@ -23,7 +23,9 @@ fi
 echo ""
 echo "installing git ... ------------------------------------------------------------"
 echo ""
-sudo apt-get --assume-yes install git-core
+sudo apt-get --assume-yes install git-core >/dev/null 2>&1
+# also installing libjack to get rid of "error while loading shared libraries"-error
+sudo apt-get --assume-yes install libjack-jackd2-dev >/dev/null 2>&1
 echo ""
 
 echo "cloning terminal tedium repo ... ----------------------------------------------"

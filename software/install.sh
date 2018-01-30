@@ -57,12 +57,13 @@ if [[ "$HARDWARE_VERSION" == 'armv6l' ]]; then
 	wget http://msp.ucsd.edu/Software/$PD_VERSION-armv6.rpi.tar.gz
 	tar -xvzf $PD_VERSION-armv6.rpi.tar.gz >/dev/null
 	rm $PD_VERSION-armv6.rpi.tar.gz
-	mv $PD_VERSION-armv6 $PD_VERSION
 else
 	wget http://msp.ucsd.edu/Software/$PD_VERSION.rpi.tar.gz
 	tar -xvzf $PD_VERSION.rpi.tar.gz >/dev/null
 	rm $PD_VERSION.rpi.tar.gz
 fi
+
+mv $PD_VERSION* $PD_VERSION
 
 echo ""
 
@@ -156,7 +157,7 @@ echo "done ... clean up + reboot -----------------------------------------------
 
 # remove hardware files and other stuff that's not needed
 cd /home/pi/terminal_tedium/software/
-rm -r externals
+# rm -r externals
 rm asound.conf
 rm pdpd
 rm pullup.py

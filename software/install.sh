@@ -8,7 +8,7 @@ echo ""
 echo "(sit back, this will take a 2-3 minutes)"
 echo ""
 
-PD_VERSION="pd-0.47-1"
+PD_VERSION="pd-0.48-1"
 
 HARDWARE_VERSION=$(uname -m)
 
@@ -52,9 +52,16 @@ echo ""
 echo "installing pd ($PD_VERSION)... -------------------------------------------------"
 echo ""
 cd /home/pi
-wget http://msp.ucsd.edu/Software/$PD_VERSION.armv7.tar.gz
-tar -xvzf $PD_VERSION.armv7.tar.gz >/dev/null
-rm $PD_VERSION.armv7.tar.gz
+
+if [[ "$HARDWARE_VERSION" == 'armv6l' ]]; then
+	wget http://msp.ucsd.edu/Software/$PD_VERSION-armv6.rpi.tar.gz
+	tar -xvzf $PD_VERSION-armv6.rpi.tar.gz >/dev/null
+	rm $PD_VERSION-armv6.rpi.tar.gz
+else
+	wget http://msp.ucsd.edu/Software/$PD_VERSION.rpi.tar.gz
+	tar -xvzf $PD_VERSION.rpi.tar.gz >/dev/null
+	rm $PD_VERSION.rpi.tar.gz
+fi
 
 echo ""
 

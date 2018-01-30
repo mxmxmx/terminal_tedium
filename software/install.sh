@@ -97,8 +97,7 @@ rm tedium_output.o
 rm tedium_switch.o
 
 echo " > abl_link~"
-cd /home/pi/terminal_tedium/software/externals/abl_link/
-sudo mv abl_link~.pd_linux /home/pi/$PD_VERSION/extra/
+sudo mv abl_link/abl_link~.pd_linux /home/pi/$PD_VERSION/extra/
 
 echo ""
 

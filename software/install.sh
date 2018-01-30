@@ -156,7 +156,7 @@ echo "done ... clean up + reboot -----------------------------------------------
 
 # remove hardware files and other stuff that's not needed
 cd /home/pi/terminal_tedium/software/
-# rm -r externals
+rm -r externals
 rm asound.conf
 rm pdpd
 rm pullup.py
@@ -170,5 +170,5 @@ rm *.md
 cd /home/pi/
 rm install.sh
 
-# sudo reboot
+sudo reboot
 echo ""

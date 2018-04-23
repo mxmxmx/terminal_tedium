@@ -5,7 +5,7 @@ echo ""
 echo ""
 echo ">>>>> terminal tedium <<<<<< --------------------------------------------------"
 echo ""
-echo "(sit back, this will take a 2-3 minutes)"
+echo "(sit back, this will take a few minutes)"
 echo ""
 
 PD_VERSION="pd-0.48-1"

@@ -5,10 +5,10 @@ echo ""
 echo ""
 echo ">>>>> terminal tedium <<<<<< --------------------------------------------------"
 echo ""
-echo "(sit back, this will take a 2-3 minutes)"
+echo "(sit back, this will take a few minutes)"
 echo ""
 
-PD_VERSION="pd-0.47-1"
+PD_VERSION="pd-0.48-1"
 
 HARDWARE_VERSION=$(uname -m)
 
@@ -23,7 +23,9 @@ fi
 echo ""
 echo "installing git ... ------------------------------------------------------------"
 echo ""
-sudo apt-get --assume-yes install git-core
+sudo apt-get --assume-yes install git-core >/dev/null 2>&1
+# also installing libjack to get rid of "error while loading shared libraries"-error
+sudo apt-get --assume-yes install libjack-jackd2-dev >/dev/null 2>&1
 echo ""
 
 echo "cloning terminal tedium repo ... ----------------------------------------------"
@@ -52,9 +54,18 @@ echo ""
 echo "installing pd ($PD_VERSION)... -------------------------------------------------"
 echo ""
 cd /home/pi
-wget http://msp.ucsd.edu/Software/$PD_VERSION.armv7.tar.gz
-tar -xvzf $PD_VERSION.armv7.tar.gz >/dev/null
-rm $PD_VERSION.armv7.tar.gz
+
+if [[ "$HARDWARE_VERSION" == 'armv6l' ]]; then
+	wget http://msp.ucsd.edu/Software/$PD_VERSION-armv6.rpi.tar.gz
+	tar -xvzf $PD_VERSION-armv6.rpi.tar.gz >/dev/null
+	rm $PD_VERSION-armv6.rpi.tar.gz
+else
+	wget http://msp.ucsd.edu/Software/$PD_VERSION.rpi.tar.gz
+	tar -xvzf $PD_VERSION.rpi.tar.gz >/dev/null
+	rm $PD_VERSION.rpi.tar.gz
+fi
+
+mv $PD_VERSION* $PD_VERSION
 
 echo ""
 
@@ -88,8 +99,7 @@ rm tedium_output.o
 rm tedium_switch.o
 
 echo " > abl_link~"
-cd home/pi/terminal_tedium/software/externals/abl_link/
-sudo mv abl_link~.pd_linux /home/pi/$PD_VERSION/extra/
+sudo mv abl_link/abl_link~.pd_linux /home/pi/$PD_VERSION/extra/
 
 echo ""
 

@@ -14,3 +14,5 @@ raspberry pi 2 / pi 3 / zero (W) / pi a+ / b+  eurorack stereo codec (wm8731) br
 
 
 build info, see here: https://github.com/mxmxmx/terminal_tedium/wiki
+
+[PCBs/panels](https://pushermanproductions.com/?s=terminal&post_type=product)

@@ -15,7 +15,7 @@
  */
 
 #define _USE_BSD
-#define _BSD_SOURCE
+#define DEFAULT_SOURCE
 
 #include <netinet/in.h>
 #if __unix__ && !__APPLE__

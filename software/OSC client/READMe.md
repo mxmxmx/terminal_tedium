@@ -1,12 +1,12 @@
 # (primitive) OSC / UDP client
 
-- note: atm, this works with the wm8731 version only.
+- note: as is, the client works with the wm8731 version only.
 
 - still needs adjusting port # and IP address *manually* (in `int main(void)`)
 
 - compile with: 
 
-`gcc *.c -Werror -lwiringPi -std=c99 -O2 -g -o tedium_osc` 
+`gcc *.c -Werror -lwiringPi -std=gnu99 -O2 -g -o tedium_osc` 
 
 - run with:
 
@@ -16,7 +16,7 @@
 
 `/adc0 value, /adc1 value, /adc2 value ... `
 
-- button presses (short, long) and triggers are sent as individual OSC messages (`T` or `F`), namely:
+- button presses (short, long) and triggers are sent as individual OSC messages (`1` or `0`), namely:
 
 `/trigger1 value`
 `/trigger2 value`

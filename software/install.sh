@@ -42,7 +42,7 @@ echo "installing wiringPi ... --------------------------------------------------
 echo ""
 cd /home/pi
 sudo apt-get --assume-yes purge wiringpi >/dev/null 2>&1
-git clone git://git.drogon.net/wiringPi
+git clone git://git.drogon.net/wiringPi || git clone https://github.com/WiringPi/WiringPi.git wiringPi
 cd wiringPi 
 git pull origin 
 ./build >/dev/null 2>&1

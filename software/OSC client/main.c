@@ -7,10 +7,10 @@
 *   - TD: make more userfriendly, pass IP and port as arguments, etc.
 *
 *
-*   compile with: gcc *.c -Werror -lwiringPi -std=c99 -O2 -g -o tedium_osc 
+*   compile with: gcc *.c -Werror -lwiringPi -std=gnu99 -O2 -g -o tedium_osc 
 */
 
-#define _BSD_SOURCE
+#define DEFAULT_SOURCE
 
 #include <stdio.h>
 #include <string.h>
@@ -20,6 +20,7 @@
 #include <fcntl.h>
 #include <time.h>
 #include <unistd.h>
+#include <sys/time.h>  
 
 #include <wiringPi.h>
 #include <wiringPiSPI.h>
@@ -61,7 +62,6 @@ void die(char *s)
     exit(1);
 }
 
-
 uint16_t adc[ADC_NUM_CHANNELS]; // adc values
 
 
@@ -96,6 +96,7 @@ uint16_t _wait_TR1, _wait_TR2, _wait_TR3, _wait_TR4;
 mcp3208 : return 1 if we need to send OSC, 0 otherwise
 
 */
+
 
 uint16_t readADC(int _channel, uint16_t *adc_val){ 
 
@@ -235,12 +236,11 @@ PI_THREAD (handle_GPIO)
 
 int main(void)
 {
-
     struct sockaddr_in _serv;
     int s, i, slen = sizeof(_serv);
     char buf[BUFLEN];
     int port = 9000;
-    char *ip = "192.168.0.18"; // "127.0.0.1"
+    char *ip = "127.0.0.1"; 
 
     memset(adc, 0, ADC_NUM_CHANNELS);
 
@@ -332,7 +332,8 @@ int main(void)
               case OK:
                 break;
               case SHORT_PRESS: {
-                int len = tosc_writeMessage(buf, sizeof(buf), "/button1", "T");
+
+                int len = tosc_writeMessage(buf, sizeof(buf), "/button1", "i", 1);
                   // send message:
                   sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
                   piLock (_MUTEX);
@@ -340,9 +341,9 @@ int main(void)
                   piUnlock (_MUTEX);
                 break;
               }
-              case LONG_PRESS: {
 
-                int len = tosc_writeMessage(buf, sizeof(buf), "/button1_long", "T");
+              case LONG_PRESS: {
+                int len = tosc_writeMessage(buf, sizeof(buf), "/button1_long", "i", 1);
                   // send message:
                   sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
                   piLock (_MUTEX);
@@ -351,8 +352,7 @@ int main(void)
                 break;
               }
               case SEND_OFF_MSG: {
-
-                int len = tosc_writeMessage(buf, sizeof(buf), "/button1", "F");
+                int len = tosc_writeMessage(buf, sizeof(buf), "/button1", "i", 0);
                   // send message:
                   sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
                   piLock (_MUTEX);
@@ -361,10 +361,9 @@ int main(void)
                 break;
               }
               case SEND_OFF_MSG_L: {
-
-                int len = tosc_writeMessage(buf, sizeof(buf), "/button1_long", "F");
+                int len = tosc_writeMessage(buf, sizeof(buf), "/button1_long", "i", 0);
                   // send message:
-                  sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
+                  sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);		
                   piLock (_MUTEX);
                     button1->_OSC_state = OK;
                   piUnlock (_MUTEX);
@@ -378,7 +377,7 @@ int main(void)
               case OK:
                 break;
               case SHORT_PRESS: {
-                int len = tosc_writeMessage(buf, sizeof(buf), "/button2", "T");
+                int len = tosc_writeMessage(buf, sizeof(buf), "/button2", "i", 1);
                   // send message:
                   sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
                   piLock (_MUTEX);
@@ -388,7 +387,7 @@ int main(void)
               }
               case LONG_PRESS: {
 
-                int len = tosc_writeMessage(buf, sizeof(buf), "/button2_long", "T");
+                int len = tosc_writeMessage(buf, sizeof(buf), "/button2_long", "i", 1);
                   // send message:
                   sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
                   piLock (_MUTEX);
@@ -398,7 +397,7 @@ int main(void)
               }
               case SEND_OFF_MSG: {
 
-                int len = tosc_writeMessage(buf, sizeof(buf), "/button2", "F");
+                int len = tosc_writeMessage(buf, sizeof(buf), "/button2", "i", 0);
                   // send message:
                   sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
                   piLock (_MUTEX);
@@ -408,7 +407,7 @@ int main(void)
               }
               case SEND_OFF_MSG_L: {
 
-                int len = tosc_writeMessage(buf, sizeof(buf), "/button2_long", "F");
+                int len = tosc_writeMessage(buf, sizeof(buf), "/button2_long", "i", 0);
                   // send message:
                   sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
                   piLock (_MUTEX);
@@ -424,7 +423,7 @@ int main(void)
               case OK:
                 break;
               case SHORT_PRESS: {
-                int len = tosc_writeMessage(buf, sizeof(buf), "/button3", "T");
+                int len = tosc_writeMessage(buf, sizeof(buf), "/button3", "i", 1);
                   // send message:
                   sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
                   piLock (_MUTEX);
@@ -436,7 +435,7 @@ int main(void)
               }
               case LONG_PRESS: {
 
-                int len = tosc_writeMessage(buf, sizeof(buf), "/button3_long", "T");
+                int len = tosc_writeMessage(buf, sizeof(buf), "/button3_long", "i", 1);
                   // send message:
                   sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
                   piLock (_MUTEX);
@@ -448,7 +447,7 @@ int main(void)
               }
               case SEND_OFF_MSG: {
 
-                int len = tosc_writeMessage(buf, sizeof(buf), "/button3", "F");
+                int len = tosc_writeMessage(buf, sizeof(buf), "/button3", "i", 0);
                   // send message:
                   sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
                   piLock (_MUTEX);
@@ -458,7 +457,7 @@ int main(void)
               }
               case SEND_OFF_MSG_L: {
 
-                int len = tosc_writeMessage(buf, sizeof(buf), "/button3_long", "F");
+                int len = tosc_writeMessage(buf, sizeof(buf), "/button3_long", "i", 0);
                   // send message:
                   sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
                   piLock (_MUTEX);
@@ -474,7 +473,7 @@ int main(void)
             if (TR1_flag && !TR1_OFF) { 
 
                     TR1_flag =  0;
-                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger1", "T");
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger1", "i", 1);
                     // send message:
                     if (sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen)) TR1_OFF = 1;
                     _wait_TR1 = 0;
@@ -483,7 +482,7 @@ int main(void)
             if (TR2_flag && !TR2_OFF) { 
 
                     TR2_flag =  0;
-                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger2", "T");
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger2", "i", 1);
                     // send message:
                     if (sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen)) TR2_OFF = 1;
                     _wait_TR2 = 0;
@@ -492,7 +491,7 @@ int main(void)
             if (TR3_flag && !TR3_OFF) { 
 
                     TR3_flag =  0;
-                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger3", "T");
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger3", "i", 1);
                     // send message:
                     if (sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen)) TR3_OFF = 1;
                     _wait_TR3 = 0;
@@ -501,7 +500,7 @@ int main(void)
             if (TR4_flag && !TR4_OFF) { 
 
                     TR4_flag =  0;
-                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger4", "T");
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger4", "i", 1);
                     // send message:
                     if (sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen)) TR4_OFF = 1;
                     _wait_TR4 = 0;
@@ -512,7 +511,7 @@ int main(void)
             else if (TR1_OFF && _wait_TR1 >= TIMEOUT_T) {
                     // reset
                     TR1_OFF = _wait_TR1 = 0;
-                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger1", "F");
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger1", "i", 0);
                     sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
             } 
             // turn off gate2
@@ -520,7 +519,7 @@ int main(void)
             else if (TR2_OFF && _wait_TR2 >= TIMEOUT_T) {
                     // reset
                     TR2_OFF = _wait_TR2 = 0;
-                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger2", "F");
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger2", "i", 0);
                     sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
             } 
             // turn off gate3
@@ -528,7 +527,7 @@ int main(void)
             else if (TR3_OFF && _wait_TR3 >= TIMEOUT_T) {
                     // reset
                     TR3_OFF = _wait_TR3 = 0;
-                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger3", "F");
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger3", "i", 0);
                     sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
             } 
             // turn off gate4
@@ -536,11 +535,11 @@ int main(void)
             else if (TR4_OFF && _wait_TR4 >= TIMEOUT_T) {
                     // reset
                     TR4_OFF = _wait_TR4 = 0;
-                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger4", "F");
+                    int len = tosc_writeMessage(buf, sizeof(buf), "/trigger4", "i", 0);
                     sendto(s, buf, len, 0, (struct sockaddr *) &_serv, slen);
             }
     }
     close(s);
     return 0;
 }
-
+// end
